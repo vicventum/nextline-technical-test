@@ -14,6 +14,8 @@ export default {
 
     <section class="task-gallery">
       <TaskCard class="task"> </TaskCard>
+      <TaskCard class="task"> </TaskCard>
+      <TaskCard class="task"> </TaskCard>
     </section>
   </div>
 </template>
@@ -21,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 .task-gallery {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
 }
 </style>

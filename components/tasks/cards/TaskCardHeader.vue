@@ -14,7 +14,7 @@ export default {}
 
       <h2 class="text-h6">Terminar de leer los Juego del Hambre</h2>
 
-      <span class="text-body-2 light--text text--darken-4"> 26/03/2024 </span>
+      <!-- <span class="text-body-2 light--text text--darken-4"> 26/03/2024 </span> -->
     </div>
     <v-btn icon color="error lighten-1">
       <v-icon>mdi-trash-can-outline</v-icon>
