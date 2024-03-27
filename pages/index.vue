@@ -1,25 +1,27 @@
 <script>
+import TaskCard from '../components/tasks/cards/TaskCard.vue'
 import TaskActions from '@/components/tasks/sections/TaskActions.vue'
 
 export default {
   name: 'IndexPage',
-  components: { TaskActions },
+  components: { TaskActions, TaskCard },
 }
 </script>
 
 <template>
   <div style="height: 1000vh">
-    <TaskActions />
+    <TaskActions class="mb-10" />
+
+    <section class="task-gallery">
+      <TaskCard class="task"> </TaskCard>
+    </section>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.actions {
-  display: flex;
-
-  &__icons {
-    display: flex;
-    gap: 0.5rem;
-  }
+.task-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 </style>

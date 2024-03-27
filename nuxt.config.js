@@ -78,6 +78,8 @@ export default {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
           background: '#F4F6F8',
+          dark: '#121721',
+		      light: '#FAFAFA',
         },
         dark: {
           primary: colors.teal.darken1,

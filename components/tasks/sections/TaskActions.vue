@@ -22,3 +22,14 @@ export default {
     </div>
   </BaseCard>
 </template>
+
+<style lang="scss" scope>
+.actions {
+  display: flex;
+
+  &__icons {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+</style>
