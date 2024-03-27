@@ -1,0 +1,22 @@
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--v-primary-base) transparent;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    // background: var(--v-theme-background);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--v-primary-base), 0.8);
+    transition: background-color 0.2s ease-in-out;
+    // border-radius: 25px;
+    &:hover {
+      background-color: rgba(var(--v-primary-base), 1);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@use '../utils/scrollbar.scss';
+
+html {
+  // font-size: fs.$body-1-size;
+  // font-family: fs.$body-1-font-family;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  @extend .scrollbar;
+}
