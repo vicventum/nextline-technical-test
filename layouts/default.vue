@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <LayoutHeader class="mb-8" />
+    <LayoutHeader class="mb-10" />
 
     <v-main>
       <v-container>

@@ -9,7 +9,14 @@ $material-light: (
 );
 // --- v-container
 $container-max-widths: (
-  'lg': 1110px,
+  'lg': 1010px,
+);
+
+// --- v-btn
+$button-elevation: (
+  'default': 0,
+  'hover': 2,
+  'active': 4,
 );
 
 @import '~vuetify/src/styles/styles.sass';

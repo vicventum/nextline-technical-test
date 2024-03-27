@@ -1,0 +1,14 @@
+{
+  "NuxtLogo": {
+    "description": "Auto imported from components/NuxtLogo.vue"
+  },
+  "BaseCard": {
+    "description": "Auto imported from components/base/BaseCard.vue"
+  },
+  "LayoutHeader": {
+    "description": "Auto imported from components/layout/LayoutHeader.vue"
+  },
+  "TasksSectionsTaskActions": {
+    "description": "Auto imported from components/tasks/sections/TaskActions.vue"
+  }
+}

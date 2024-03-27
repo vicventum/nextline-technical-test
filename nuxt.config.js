@@ -30,7 +30,14 @@ export default {
   plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: {
+    path: '~/components',
+    extensions: ['vue'],
+    prefix: 'app',
+    pathPrefix: false,
+    ignore: ['~components/pages', '**/_**'],
+  },
+  // components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
