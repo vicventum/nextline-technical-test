@@ -2,6 +2,11 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+
+// background
+$material-light: (
+  'background': var(--v-background-base),
+);
 // --- v-container
 $container-max-widths: (
   'lg': 1110px,

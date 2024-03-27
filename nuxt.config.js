@@ -70,6 +70,7 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
+          background: '#F4F6F8',
         },
         dark: {
           primary: colors.teal.darken1,
@@ -79,6 +80,7 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
+          background: '#121721',
         },
       },
     },
