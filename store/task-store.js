@@ -4,27 +4,38 @@ import { getTaskList } from '@/components/tasks/services/task-service.js'
 
 export const state = () => ({
   taskList: [],
+  isErrorTaskList: false,
 })
 
 export const getters = {
   taskList(state) {
     return state.taskList
   },
+  isErrorTaskList(state) {
+    return state.isErrorTaskList
+  },
 }
 
 export const actions = {
   async fetchTaskList(context) {
     const provider = getAll
-    const rawTaskList = await getTaskList(provider)
-    const taskList = formatTaskList(rawTaskList)
-
-    context.commit('setTaskList', taskList)
+    try {
+      const rawTaskList = await getTaskList(provider)
+      const taskList = formatTaskList(rawTaskList)
+      context.commit('setTaskList', taskList)
+    } catch (error) {
+      console.error(error)
+      context.commit('setIsErrorTaskList', true)
+    }
   },
 }
 
 export const mutations = {
   setTaskList(state, data) {
     state.taskList = data
+  },
+  setIsErrorTaskList(state, data) {
+    state.isErrorTaskList = data
   },
 }
 
