@@ -3,7 +3,7 @@ export default {}
 </script>
 
 <template>
-  <v-app-bar class="header primary" flat>
+  <v-app-bar class="header primary " flat max-height="64px">
     <v-container class="d-flex align-center">
       <Nuxt-Link to="/">
         <v-toolbar-title class="white--text h2"> Task App </v-toolbar-title>
@@ -18,4 +18,5 @@ export default {}
   </v-app-bar>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

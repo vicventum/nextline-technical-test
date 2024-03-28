@@ -6,7 +6,7 @@ export default {
 
 <template>
   <BaseCard class="actions">
-    <v-btn color="primary" depressed> New task </v-btn>
+    <v-btn color="primary" to="/new" depressed> New task </v-btn>
 
     <v-spacer />
 
