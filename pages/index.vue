@@ -1,10 +1,22 @@
 <script>
-import TaskCard from '../components/tasks/cards/TaskCard.vue'
+import { mapGetters, mapActions } from 'vuex'
+import TaskCard from '@/components/tasks/cards/TaskCard.vue'
 import TaskActions from '@/components/tasks/sections/TaskActions.vue'
+// import { getAll } from '@/components/tasks/services/providers/task-axios-provider'
 
 export default {
   name: 'IndexPage',
   components: { TaskActions, TaskCard },
+  async fetch() {
+    await this.fetchTaskList()
+  },
+  computed: {
+    ...mapGetters('task-store', ['taskList'])
+  },
+  methods: {
+    ...mapActions('task-store', ['fetchTaskList']),
+
+  },
 }
 </script>
 

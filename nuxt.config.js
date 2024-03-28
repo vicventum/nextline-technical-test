@@ -7,6 +7,21 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  // env: {
+  //   API_URL: 'https://ecsdevapi.nextline.mx/vdev/tasks-challenge',
+  //   TOKEN_API:
+  //     'e864a0c9eda63181d7d65bc73e61e3dc6b74ef9b82f7049f1fc7d9fc8f29706025bd271d1ee1822b15d654a84e1a0997b973a46f923cc9977b3fcbb064179ecd',
+  // },
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL,
+    TOKEN_API: process.env.TOKEN_API,
+  },
+  
+  privateRuntimeConfig: {
+    API_URL: process.env.API_URL,
+    TOKEN_API: process.env.TOKEN_API,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Task App',
@@ -27,7 +42,7 @@ export default {
   css: ['~/assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/axios-port.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: {
@@ -55,8 +70,16 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    // baseURL: 'https://ecsdevapi.nextline.mx/vdev/tasks-challenge',
+		// browserBaseURL: 'https://ecsdevapi.nextline.mx/vdev/tasks-challenge',
+    // headers: {
+    //   Authorization: 'Bearer e864a0c9eda63181d7d65bc73e61e3dc6b74ef9b82f7049f1fc7d9fc8f29706025bd271d1ee1822b15d654a84e1a0997b973a46f923cc9977b3fcbb064179ecd',
+    // },
+    baseURL: process.env.API_URL,
+		browserBaseURL: process.env.API_URL,
+    headers: {
+      Authorization: process.env.TOKEN_API,
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -79,7 +102,7 @@ export default {
           success: colors.green.accent3,
           background: '#F4F6F8',
           dark: '#121721',
-		      light: '#FAFAFA',
+          light: '#FAFAFA',
         },
         dark: {
           primary: colors.teal.darken1,
