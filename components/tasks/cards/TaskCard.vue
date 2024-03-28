@@ -1,18 +1,49 @@
 <script>
 import TaskCardHeader from './TaskCardHeader.vue'
-import TaskCardContent from './TaskCardContent.vue'
+// import TaskCardContent from './TaskCardContent.vue'
 import TaskCardFooter from './TaskCardFooter.vue'
 
 export default {
-  components: { TaskCardHeader, TaskCardContent, TaskCardFooter },
+  components: { TaskCardHeader, TaskCardFooter },
+  props: {
+    title: {
+      type: String,
+      default: '',
+      required: true,
+    },
+    isCompleted: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    dueDate: {
+      type: String,
+      default: '',
+      required: false,
+    },
+    // description: {
+    //   type: String,
+    //   default: '',
+    //   required: false,
+    // },
+    // tags: {
+    //   type: Array,
+    //   default: () => [],
+    //   required: false,
+    // },
+  },
 }
 </script>
 
 <template>
   <BaseCard class="task">
-    <TaskCardHeader class="mb-2" />
-    <TaskCardContent class="mb-2" />
-    <TaskCardFooter class="mb-2" />
+    <TaskCardHeader class="mb-2" :title="title" />
+    <!-- <TaskCardContent class="mb-2" :description="description" /> -->
+    <TaskCardFooter
+      class="mb-2"
+      :is-completed="isCompleted"
+      :due-date="dueDate"
+    />
   </BaseCard>
 </template>
 

@@ -11,11 +11,10 @@ export default {
     await this.fetchTaskList()
   },
   computed: {
-    ...mapGetters('task-store', ['taskList'])
+    ...mapGetters('task-store', ['taskList']),
   },
   methods: {
     ...mapActions('task-store', ['fetchTaskList']),
-
   },
 }
 </script>
@@ -25,9 +24,14 @@ export default {
     <TaskActions class="mb-10" />
 
     <section class="task-gallery">
-      <TaskCard class="task"> </TaskCard>
-      <TaskCard class="task"> </TaskCard>
-      <TaskCard class="task"> </TaskCard>
+      <TaskCard
+        v-for="task in taskList"
+        :key="task.id"
+        class="task"
+        :title="task.title"
+        :is-completed="task.isCompleted"
+        :due-date="task.dueDate"
+      />
     </section>
   </div>
 </template>
