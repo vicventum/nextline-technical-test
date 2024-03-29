@@ -1,10 +1,12 @@
 import {
   getAll,
   create,
+  remove,
 } from '@/components/tasks/services/providers/task-axios-provider.js'
 import {
   getTaskList,
   createTask,
+  deleteTask,
 } from '@/components/tasks/services/task-service.js'
 // import { utilRandomColor } from '@/utils/util-random-color.js'
 
@@ -15,6 +17,10 @@ export const state = () => ({
     isLoading: false,
   },
   creatingTask: {
+    isError: false,
+    isLoading: false,
+  },
+  deletingTask: {
     isError: false,
     isLoading: false,
   },
@@ -44,15 +50,27 @@ export const actions = {
       context.commit('setTaskListError', true)
     }
   },
-  async createTask(context, task) {
+  async createTask(context, taskId) {
     const provider = create
     try {
       context.commit('setCreatingTaskLoading', true)
-      await createTask(provider, task)
+      await createTask(provider, taskId)
       context.commit('setCreatingTaskLoading', false)
       // await context.dispatch('fetchTaskList')
     } catch (error) {
       console.error(error)
+      context.commit('setCreatingTaskError', true)
+    }
+  },
+  async deleteTask(context, task) {
+    const provider = remove
+    try {
+      context.commit('setDeletingTaskLoading', true)
+      await deleteTask(provider, task)
+      context.commit('setDeletingTaskLoading', false)
+    } catch (error) {
+      console.error(error)
+      context.commit('setDeletingTaskLoading', true)
     }
   },
 }
@@ -73,10 +91,17 @@ export const mutations = {
   setCreatingTaskLoading(state, data) {
     state.creatingTask.isLoading = data
   },
+  setDeletingTaskError(state, data) {
+    state.deletingTask.isError = data
+  },
+  setDeletingTaskLoading(state, data) {
+    state.deletingTask.isLoading = data
+  },
 }
 
 function formatTaskList(rawTaskList) {
   return rawTaskList.map((task) => ({
+    id: task.id,
     title: task.title,
     isCompleted: !!task.is_completed,
     dueDate: task.due_date,

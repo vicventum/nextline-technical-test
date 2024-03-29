@@ -12,6 +12,12 @@ export default {
     //   required: true,
     // },
   },
+  emits: ['delete'],
+  methods: {
+    deleteTask(taskId) {
+      this.$emit('delete', taskId)
+    },
+  },
 }
 </script>
 
@@ -38,7 +44,7 @@ export default {
 
       <h2 class="text-h6">{{ title }}</h2>
     </div>
-    <v-btn icon color="error lighten-1">
+    <v-btn icon color="error lighten-1" @click="deleteTask">
       <v-icon>mdi-trash-can-outline</v-icon>
     </v-btn>
   </header>

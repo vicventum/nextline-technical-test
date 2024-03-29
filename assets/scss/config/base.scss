@@ -19,18 +19,10 @@ p {
   text-wrap: pretty;
 }
 
+// Animación entre páginas
 .pages-enter-active {
   animation: fade 0.15s ease-out;
 }
 .pages-leave-active {
   animation: fade 0.15s ease-out reverse;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }

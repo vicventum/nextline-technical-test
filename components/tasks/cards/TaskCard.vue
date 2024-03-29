@@ -6,6 +6,11 @@ import TaskCardFooter from './TaskCardFooter.vue'
 export default {
   components: { TaskCardHeader, TaskCardFooter },
   props: {
+    id: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
     title: {
       type: String,
       default: '',
@@ -32,12 +37,18 @@ export default {
     //   required: false,
     // },
   },
+  emits: ['delete'],
+  methods: {
+    deleteTask(taskId) {
+      this.$emit('delete', taskId)
+    },
+  },
 }
 </script>
 
 <template>
   <BaseCard class="task">
-    <TaskCardHeader class="mb-2" :title="title" />
+    <TaskCardHeader class="mb-2" :title="title" @delete="deleteTask(id)" />
     <!-- <TaskCardContent class="mb-2" :description="description" /> -->
     <TaskCardFooter
       class="mb-2"
@@ -49,8 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 .task {
-  cursor: pointer;
-
+  // cursor: pointer;
   transition-property: box-shadow, filter;
   transition-duration: 0.1s;
   transition-timing-function: ease-out;

@@ -14,7 +14,6 @@ export default {
         comments: '',
         tags: [],
         token: '',
-        // check: true, date: '2024-03-28'
       },
     }
   },
@@ -35,7 +34,7 @@ export default {
       }
       await this.createTask(formattedTaskData)
 
-      this.$router.push('/')
+      // this.$router.push('/')
     },
     getTextValuesAsString(array) {
       return array.map((item) => item.text).join(', ')
@@ -45,17 +44,17 @@ export default {
 </script>
 
 <template>
-  <v-form class="form">
+  <v-form class="form" @submit.prevent="createNewTask">
     <BaseCard class="mb-6">
       <InputListTask v-model="taskData" />
     </BaseCard>
     <BaseCard class="form__actions">
       <v-btn
         color="success"
+        type="submit"
         :loading="creatingTask.isLoading"
         :disabled="creatingTask.isLoading"
         depressed
-        @click="createNewTask"
       >
         Create task
       </v-btn>

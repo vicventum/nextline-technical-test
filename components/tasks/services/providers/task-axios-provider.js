@@ -8,3 +8,6 @@ export async function getAll() {
 export async function create(task) {
   await axiosClient.post('/tasks', task)
 }
+export async function remove(taskId) {
+  await axiosClient.delete(`/tasks/${taskId}`)
+}

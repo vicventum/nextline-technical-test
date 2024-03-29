@@ -9,3 +9,7 @@ export async function getTaskList(getAll) {
 export async function createTask(create, task) {
   await create(task)
 }
+
+export async function deleteTask(remove, taskId) {
+  await remove(taskId)
+}
