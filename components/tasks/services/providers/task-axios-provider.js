@@ -1,6 +1,10 @@
-import apiClient from '@/services/api-client'
+import axiosClient from '@/services/api-client'
 
 export async function getAll() {
-  const resp = await apiClient.get('/tasks')
+  const resp = await axiosClient.get('/tasks')
   return resp.data
+}
+
+export async function create(task) {
+  await axiosClient.post('/tasks', task)
 }

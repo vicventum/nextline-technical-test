@@ -1,18 +1,31 @@
-import { getAll } from '@/components/tasks/services/providers/task-axios-provider.js'
-import { getTaskList } from '@/components/tasks/services/task-service.js'
+import {
+  getAll,
+  create,
+} from '@/components/tasks/services/providers/task-axios-provider.js'
+import {
+  getTaskList,
+  createTask,
+} from '@/components/tasks/services/task-service.js'
 // import { utilRandomColor } from '@/utils/util-random-color.js'
 
 export const state = () => ({
-  taskList: [],
-  isErrorTaskList: false,
+  taskList: {
+    data: [],
+    isError: false,
+    isLoading: false,
+  },
+  creatingTask: {
+    isError: false,
+    isLoading: false,
+  },
 })
 
 export const getters = {
   taskList(state) {
     return state.taskList
   },
-  isErrorTaskList(state) {
-    return state.isErrorTaskList
+  creatingTask(state) {
+    return state.creatingTask
   },
 }
 
@@ -20,22 +33,45 @@ export const actions = {
   async fetchTaskList(context) {
     const provider = getAll
     try {
+      context.commit('setTaskListLoading', true)
       const rawTaskList = await getTaskList(provider)
+      context.commit('setTaskListLoading', false)
+
       const taskList = formatTaskList(rawTaskList)
-      context.commit('setTaskList', taskList)
+      context.commit('setTaskListData', taskList)
     } catch (error) {
       console.error(error)
-      context.commit('setIsErrorTaskList', true)
+      context.commit('setTaskListError', true)
+    }
+  },
+  async createTask(context, task) {
+    const provider = create
+    try {
+      context.commit('setCreatingTaskLoading', true)
+      await createTask(provider, task)
+      context.commit('setCreatingTaskLoading', false)
+      // await context.dispatch('fetchTaskList')
+    } catch (error) {
+      console.error(error)
     }
   },
 }
 
 export const mutations = {
-  setTaskList(state, data) {
-    state.taskList = data
+  setTaskListData(state, data) {
+    state.taskList.data = data
   },
-  setIsErrorTaskList(state, data) {
-    state.isErrorTaskList = data
+  setTaskListError(state, data) {
+    state.taskList.isError = data
+  },
+  setTaskListLoading(state, data) {
+    state.taskList.isLoading = data
+  },
+  setCreatingTaskError(state, data) {
+    state.creatingTask.isError = data
+  },
+  setCreatingTaskLoading(state, data) {
+    state.creatingTask.isLoading = data
   },
 }
 

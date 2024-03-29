@@ -1,11 +1,6 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      default: '',
-      required: true,
-    },
     isCompleted: {
       type: Boolean,
       default: false,

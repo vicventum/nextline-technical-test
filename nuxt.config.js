@@ -120,4 +120,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+	loading: { color: '#80CBC', height: '4px', continuous: false },
+
+  transition: {
+		name: 'pages',
+		mode: 'out-in',
+	},
 }

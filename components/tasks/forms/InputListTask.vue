@@ -13,12 +13,12 @@ export default {
   },
   data() {
     return {
-      obj: this.value,
+      taskData: this.value,
     }
   },
   watch: {
     value(newValue, oldValue) {
-      this.obj = newValue
+      this.taskData = newValue
       // this.$emit('input', newValue)
       // this.$emit('close', false)
     },
@@ -28,14 +28,14 @@ export default {
 
 <template>
   <div class="input-list">
-    <v-text-field label="Title" />
-    <v-textarea name="description" label="Description" value="" rows="4" />
-    <v-textarea name="comments" label="Comments" value="" rows="3" />
+    <v-text-field v-model="taskData.title" label="Title" />
+    <v-textarea v-model="taskData.description" label="Description" rows="4" />
+    <v-textarea v-model="taskData.comments" label="Comments" rows="3" />
 
     <div class="input-list__details">
-      <v-checkbox v-model="obj.check" label="Complete" />
-      <InputCalendar v-model="obj" />
-      <InputTags />
+      <v-checkbox v-model="taskData.isCompleted" label="Complete" />
+      <InputCalendar v-model="taskData" />
+      <InputTags v-model="taskData" />
     </div>
   </div>
 </template>

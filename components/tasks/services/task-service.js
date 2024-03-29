@@ -5,3 +5,7 @@ export async function getTaskList(getAll) {
 
   return taskList
 }
+
+export async function createTask(create, task) {
+  await create(task)
+}

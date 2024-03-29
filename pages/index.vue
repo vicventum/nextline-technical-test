@@ -11,7 +11,7 @@ export default {
     await this.fetchTaskList()
   },
   computed: {
-    ...mapGetters('task-store', ['taskList', 'isErrorTaskList']),
+    ...mapGetters('task-store', ['taskList']),
   },
   methods: {
     ...mapActions('task-store', ['fetchTaskList']),
@@ -24,14 +24,17 @@ export default {
     <TaskActions class="mb-10" />
 
     <section class="task-gallery">
-      <template v-if="isErrorTaskList">
+      <template v-if="taskList.isError">
         <h2 class="text-center dark--text text--lighten-4 mt-6">
           An error has occurred, please try again or reload the page
         </h2>
       </template>
+      <template v-else-if="taskList.isLoading">
+        <h2 class="text-center dark--text text--lighten-4 mt-6">Loading...</h2>
+      </template>
       <template v-else>
         <TaskCard
-          v-for="task in taskList"
+          v-for="task in taskList.data"
           :key="task.id"
           class="task"
           :title="task.title"

@@ -1,46 +1,48 @@
 <script>
 export default {
-  data: () => ({
-    colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
-    items: [
-      { header: 'Select an option or create one' },
-      // {
-      //   text: 'Foo',
-      //   color: 'blue',
-      // },
-      // {
-      //   text: 'Bar',
-      //   color: 'red',
-      // },
-    ],
-    nonce: 1,
-    model: [
-      // {
-      //   text: 'Foo',
-      //   color: 'blue',
-      // },
-    ],
-    search: null,
-  }),
+  props: {
+    value: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  data() {
+    return {
+      taskData: this.value,
+      colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
+      items: [{ header: 'Select an option or create one' }],
+      nonce: 1,
+      model: this.value?.tags,
+      // model: ['a','b','c'],
+      search: null,
+    }
+  },
 
   watch: {
-    model(val, prev) {
-      if (val.length === prev.length) return
-
-      this.model = val.map((v) => {
-        if (typeof v === 'string') {
-          v = {
-            text: v,
-            color: this.colors[this.nonce - 1],
+    // value(newValue, oldValue) {
+    //   this.taskData.tags = newValue
+    // },
+    model: {
+      handler(newValue, oldValue) {
+        if (newValue.length === oldValue?.length) return
+  
+        this.model = newValue.map((v) => {
+          if (typeof v === 'string') {
+            v = {
+              text: v,
+              color: this.colors[this.nonce - 1],
+            }
+  
+            this.items.push(v)
+  
+            this.nonce++
           }
-
-          this.items.push(v)
-
-          this.nonce++
-        }
-
-        return v
-      })
+  
+          return v
+        })
+        this.taskData.tags = this.model
+      },
+      immediate: true,
     },
   },
 }
@@ -56,9 +58,9 @@ export default {
     label="Search for an option"
     multiple
     small-chips
-		flat
+    flat
   >
-    <template v-slot:no-data>
+    <template #no-data>
       <v-list-item>
         <span class="subheading mr-2">Create </span>
         <v-chip :color="`${colors[nonce - 1]} lighten-3`" label small>
@@ -66,7 +68,7 @@ export default {
         </v-chip>
       </v-list-item>
     </template>
-    <template v-slot:selection="{ attrs, item, parent, selected }">
+    <template #selection="{ attrs, item, parent, selected }">
       <v-chip
         v-if="item === Object(item)"
         v-bind="attrs"
@@ -81,7 +83,7 @@ export default {
         <v-icon small @click="parent.selectItem(item)"> $delete </v-icon>
       </v-chip>
     </template>
-    <template v-slot:item="{ item }">
+    <template #item="{ item }">
       <v-chip :color="`${item.color} lighten-3`" dark label small>
         {{ item.text }}
       </v-chip>

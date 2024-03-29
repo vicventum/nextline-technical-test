@@ -4,12 +4,12 @@ export default {
     // Variable para almacenar el valor implícito del `v-model`
     value: {
       type: Object,
-      default: null,
+      default: () => ({}),
     },
   },
   data() {
     return {
-      obj: this.value,
+      taskData: this.value,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -24,11 +24,14 @@ export default {
 
   watch: {
     value(newValue, oldValue) {
-      this.obj = newValue
+      this.taskData.dueDate = newValue
     },
-    date(val) {
-      this.dateFormatted = this.formatDate(this.date)
-      this.obj.date = val
+    date: {
+      handler(newValue) {
+        this.dateFormatted = this.formatDate(this.date)
+        this.taskData.dueDate = newValue
+      },
+      immediate: true,
     },
   },
 
