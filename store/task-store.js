@@ -49,6 +49,9 @@ export const getters = {
   creatingTask(state) {
     return state.creatingTask
   },
+  deletingTask(state) {
+    return state.deletingTask
+  },
   editingTask(state) {
     return state.editingTask
   },
@@ -104,7 +107,7 @@ export const actions = {
       await deleteTask(provider, taskId)
     } catch (error) {
       console.error(error)
-      context.commit('setDeletingTaskLoading', true)
+      context.commit('setDeletingTaskError', true)
     }
     context.commit('setDeletingTaskLoading', false)
   },
@@ -146,6 +149,12 @@ export const mutations = {
   },
   setCreatingTaskLoading(state, data) {
     state.creatingTask.isLoading = data
+  },
+  setdeletingTaskError(state, data) {
+    state.deletingTask.isError = data
+  },
+  setDeletingTaskLoading(state, data) {
+    state.deletingTask.isLoading = data
   },
 
   setEditingTaskError(state, data) {

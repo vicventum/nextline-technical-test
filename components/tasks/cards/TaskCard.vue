@@ -51,6 +51,7 @@ export default {
     <TaskCardHeader class="mb-2" :title="title" @delete="deleteTask(id)" />
     <!-- <TaskCardContent class="mb-2" :description="description" /> -->
     <TaskCardFooter
+      :id="id"
       class="mb-2"
       :is-completed="isCompleted"
       :due-date="dueDate"

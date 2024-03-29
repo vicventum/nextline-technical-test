@@ -20,14 +20,23 @@ export default {
 
   watch: {
     value: {
-      handler(newValue) {
-        this.model = newValue.tags
-        console.log('🚀 ~ handler ~ this.model:', this.model, newValue.tags)
+      handler(newValue, oldValue) {
+        // this.model = newValue.tags
+        this.taskData.tags = this.model
+        // if (!this.model.length && oldValue) this.model = newValue.tags
+        // console.log(
+        //   '🚀 ~ handler ~ this.model:',
+        //   !this.model.length,
+        //   this.model,
+        //   newValue.tags,
+        //   newValue
+        // )
       },
       immediate: true,
     },
     model: {
       handler(newValue, oldValue) {
+        // console.log('🚀🚀 ~ handler ~ oldValue:', oldValue, this.model, newValue.tags)
         if (newValue.length === oldValue?.length) return
 
         this.model = newValue.map((v) => {

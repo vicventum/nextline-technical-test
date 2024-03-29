@@ -1,9 +1,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import InputListTask from '@/components/tasks/forms/InputListTask.vue'
+import FormActions from '@/components/tasks/forms/FormActions.vue'
 
 export default {
-  components: { InputListTask },
+  components: { InputListTask, FormActions },
   data() {
     return {
       taskData: {
@@ -48,18 +49,10 @@ export default {
     <BaseCard class="mb-6">
       <InputListTask v-model="taskData" />
     </BaseCard>
-    <BaseCard class="form__actions">
-      <v-btn
-        color="success"
-        type="submit"
-        :loading="creatingTask.isLoading"
-        :disabled="creatingTask.isLoading"
-        depressed
-      >
-        Create task
-      </v-btn>
-    </BaseCard>
-    <!-- <p v-if="creatingTask.isError">Error creating task</p> -->
+    <FormActions
+      primary-button-text="Create task"
+      :is-loading="creatingTask.isLoading"
+    />
   </v-form>
 </template>
 

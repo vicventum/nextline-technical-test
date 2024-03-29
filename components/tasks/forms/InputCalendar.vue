@@ -25,11 +25,17 @@ export default {
   watch: {
     value(newValue, oldValue) {
       this.taskData.dueDate = newValue
+      // const obj = {...this.taskData}
+      // obj.dueDate = newValue
+      // this.taskData = obj
     },
     date: {
       handler(newValue) {
         this.dateFormatted = this.formatDate(this.date)
         this.taskData.dueDate = newValue
+        // const obj = {...this.taskData}
+        // obj.dueDate = newValue
+        // this.taskData = obj
       },
       immediate: true,
     },
