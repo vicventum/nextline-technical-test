@@ -1,10 +1,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import BaseCard from '@/components/base/BaseCard.vue'
 import InputListTask from '@/components/tasks/forms/InputListTask.vue'
 import FormActions from '@/components/tasks/forms/FormActions.vue'
 
 export default {
-  components: { InputListTask, FormActions },
+  components: { InputListTask, FormActions, BaseCard },
   data() {
     return {
       taskId: '',

@@ -1,6 +1,8 @@
 <script>
+import BaseCard from '@/components/base/BaseCard.vue'
 export default {
   name: 'TaskActions',
+  components: { BaseCard },
 }
 </script>
 

@@ -1,10 +1,11 @@
 <script>
-import TaskCardHeader from './TaskCardHeader.vue'
-// import TaskCardContent from './TaskCardContent.vue'
-import TaskCardFooter from './TaskCardFooter.vue'
+import BaseCard from '@/components/base/BaseCard.vue'
+import TaskCardHeader from '@/components/tasks/cards/TaskCardHeader.vue'
+// import TaskCardContent from '@/components/tasks/cards/TaskCardContent.vue'
+import TaskCardFooter from '@/components/tasks/cards/TaskCardFooter.vue'
 
 export default {
-  components: { TaskCardHeader, TaskCardFooter },
+  components: { TaskCardHeader, TaskCardFooter, BaseCard },
   props: {
     id: {
       type: Number,

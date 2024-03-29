@@ -2,8 +2,8 @@
 export default {
   props: {
     id: {
-      type: String,
-      default: '',
+      type: Number,
+      default: 0,
       required: true,
     },
     isCompleted: {
