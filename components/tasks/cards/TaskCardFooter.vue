@@ -17,6 +17,11 @@ export default {
       required: false,
     },
   },
+  computed: {
+    smAndUp() {
+      return this.$vuetify.breakpoint.smAndUp
+    },
+  },
 }
 </script>
 
@@ -37,13 +42,13 @@ export default {
         <v-avatar left>
           <v-icon small>mdi-checkbox-marked-circle</v-icon>
         </v-avatar>
-        Completed
+        <span v-if="smAndUp">Completed</span>
       </v-chip>
       <v-chip v-else color="warning" text-color="white" small>
         <v-avatar left>
           <v-icon small>mdi-alert-circle</v-icon>
         </v-avatar>
-        Pending
+        <span v-if="smAndUp">Pending</span>
       </v-chip>
 
       <v-divider vertical />
