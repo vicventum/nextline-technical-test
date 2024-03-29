@@ -6,23 +6,30 @@ export default {
   components: { InputListTask },
   data() {
     return {
+      taskId: '',
       taskData: {
+        id: '',
         title: '',
         isCompleted: false,
-        description: '',
         dueDate: '',
-        comments: '',
+        description: '',
         tags: [],
         token: '',
+        createdAt: '',
+        updatedAt: '',
       },
     }
   },
+  async fetch() {
+    this.taskId = this.$route.params.id
+    this.taskData = { ...(await this.getTask(this.taskId)) }
+  },
   computed: {
-    ...mapGetters('task-store', ['creatingTask']),
+    ...mapGetters('task-store', ['task', 'editingTask']),
   },
   methods: {
-    ...mapActions('task-store', ['createTask']),
-    async createNewTask() {
+    ...mapActions('task-store', ['getTask', 'editTask']),
+    async editCurrentTask() {
       const formattedTaskData = {
         title: this.taskData.title,
         is_completed: this.taskData.isCompleted ? '1' : '0',
@@ -32,7 +39,7 @@ export default {
         tags: this.getTextValuesAsString(this.taskData.tags),
         token: this.taskData.token,
       }
-      await this.createTask(formattedTaskData)
+      await this.editTask({ taskId: this.taskId, newData: formattedTaskData })
 
       // this.$router.push('/')
     },
@@ -44,7 +51,7 @@ export default {
 </script>
 
 <template>
-  <v-form class="form" @submit.prevent="createNewTask">
+  <v-form class="form" @submit.prevent="editCurrentTask">
     <BaseCard class="mb-6">
       <InputListTask v-model="taskData" />
     </BaseCard>
@@ -52,14 +59,16 @@ export default {
       <v-btn
         color="success"
         type="submit"
-        :loading="creatingTask.isLoading"
-        :disabled="creatingTask.isLoading"
+        :loading="editingTask.isLoading"
+        :disabled="editingTask.isLoading"
         depressed
       >
-        Create task
+        Edit task
       </v-btn>
+      {{ editingTask.isLoading }}
+      {{ editingTask.isError }}
     </BaseCard>
-    <!-- <p v-if="creatingTask.isError">Error creating task</p> -->
+    <!-- <p v-if="editingTask.isError">Error editing task</p> -->
   </v-form>
 </template>
 

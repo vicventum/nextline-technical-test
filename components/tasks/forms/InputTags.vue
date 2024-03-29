@@ -19,25 +19,29 @@ export default {
   },
 
   watch: {
-    // value(newValue, oldValue) {
-    //   this.taskData.tags = newValue
-    // },
+    value: {
+      handler(newValue) {
+        this.model = newValue.tags
+        console.log('🚀 ~ handler ~ this.model:', this.model, newValue.tags)
+      },
+      immediate: true,
+    },
     model: {
       handler(newValue, oldValue) {
         if (newValue.length === oldValue?.length) return
-  
+
         this.model = newValue.map((v) => {
           if (typeof v === 'string') {
             v = {
               text: v,
               color: this.colors[this.nonce - 1],
             }
-  
+
             this.items.push(v)
-  
+
             this.nonce++
           }
-  
+
           return v
         })
         this.taskData.tags = this.model
