@@ -28,13 +28,13 @@ export default {
 
 <template>
   <div class="input-list">
-    <v-text-field v-model="taskData.title" label="Title" />
+    <v-text-field v-model="taskData.title" label="Title" required />
     <v-textarea v-model="taskData.description" label="Description" rows="4" />
     <v-textarea v-model="taskData.comments" label="Comments" rows="3" />
 
     <div class="input-list__details">
       <v-checkbox v-model="taskData.isCompleted" label="Complete" />
-      <InputCalendar v-model="taskData" />
+      <InputCalendar v-model="taskData" required />
       <InputTags v-model="taskData" />
     </div>
   </div>
