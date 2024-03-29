@@ -55,6 +55,7 @@ export default {
 
     <div class="task-footer__actions">
       <v-btn :to="`/edit/${id}`" color="warning" outlined small> Edit </v-btn>
+      <v-btn :to="`/${id}`" color="primary" depressed small> View </v-btn>
     </div>
   </footer>
 </template>
@@ -64,23 +65,24 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   &__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
   }
-  
+
   &__tags {
     display: flex;
     gap: 0.5rem;
   }
-  
+
   &__actions {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 0.5rem;
   }
 }
 </style>

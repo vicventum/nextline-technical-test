@@ -51,11 +51,11 @@ export default {
 
 <style lang="scss" scoped>
 .task-list {
-	&__content {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr);
-		gap: 1rem;
-	}
+  &__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
 }
 
 // .list-enter-active {
@@ -66,8 +66,8 @@ export default {
 // }
 .list-enter-active,
 .list-leave-active {
-	transition: 0.5s ease;
-	transition-property: transform opacity
+  transition: 0.5s ease;
+  transition-property: transform opacity;
 }
 .list-enter-from,
 .list-leave-to {
