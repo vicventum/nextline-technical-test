@@ -33,6 +33,11 @@ export default {
     <template v-else-if="taskList.isLoading && !taskList.data.length">
       <h2 class="text-center dark--text text--lighten-4 mt-6">Loading...</h2>
     </template>
+    <template v-else-if="!taskList.data.length">
+      <h2 class="text-center dark--text text--lighten-4 mt-6">
+        There are no tasks to display. Create one!
+      </h2>
+    </template>
 
     <transition-group v-else name="list" class="task-list__content" tag="div">
       <TaskCard

@@ -74,6 +74,8 @@ export const actions = {
     try {
       context.commit('setTaskListLoading', true)
       const rawTaskList = await getTaskList(provider)
+      context.commit('setTaskListLoading', false)
+      console.log('🚀 ~ fetchTaskList ~ rawTaskList:', rawTaskList)
 
       const taskList = formatTaskList(rawTaskList)
       context.commit('setTaskListData', taskList)
@@ -81,14 +83,15 @@ export const actions = {
     } catch (error) {
       console.error(error)
       context.commit('setTaskListError', true)
+      context.commit('setTaskListLoading', false)
     }
-    context.commit('setTaskListLoading', false)
   },
   async getTask(context, taskId) {
     const provider = get
     try {
       context.commit('setTaskLoading', true)
       const rawTask = await getTask(provider, taskId)
+      context.commit('setTaskLoading', false)
 
       const task = formatTask(rawTask)
       context.commit('setTaskData', task)
@@ -96,42 +99,45 @@ export const actions = {
     } catch (error) {
       console.error(error)
       context.commit('setTaskError', true)
+      context.commit('setTaskLoading', false)
     }
-    context.commit('setTaskLoading', false)
   },
   async createTask(context, taskId) {
     const provider = create
     try {
       context.commit('setCreatingTaskLoading', true)
       await createTask(provider, taskId)
+      context.commit('setCreatingTaskLoading', false)
       // await context.dispatch('fetchTaskList')
     } catch (error) {
       console.error(error)
       context.commit('setCreatingTaskError', true)
+      context.commit('setCreatingTaskLoading', false)
     }
-    context.commit('setCreatingTaskLoading', false)
   },
   async deleteTask(context, taskId) {
     const provider = remove
     try {
       context.commit('setDeletingTaskLoading', true)
       await deleteTask(provider, taskId)
+      context.commit('setDeletingTaskLoading', false)
     } catch (error) {
       console.error(error)
       context.commit('setDeletingTaskError', true)
+      context.commit('setDeletingTaskLoading', false)
     }
-    context.commit('setDeletingTaskLoading', false)
   },
   async editTask(context, taskData) {
     const provider = edit
     try {
       context.commit('setEditingTaskLoading', true)
       await editTask(provider, taskData.taskId, taskData.newData)
+      context.commit('setEditingTaskLoading', false)
     } catch (error) {
       console.error(error)
       context.commit('setEditingTaskError', true)
+      context.commit('setEditingTaskLoading', false)
     }
-    context.commit('setEditingTaskLoading', false)
   },
 }
 
@@ -143,6 +149,7 @@ export const mutations = {
     state.taskList.isError = data
   },
   setTaskListLoading(state, data) {
+    console.log('🚀 ~ setTaskListLoading ~ data:', data)
     state.taskList.isLoading = data
   },
   setTaskData(state, data) {
