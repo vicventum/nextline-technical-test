@@ -2,10 +2,10 @@
 import { mapGetters, mapActions } from 'vuex'
 import BaseCard from '@/components/base/BaseCard.vue'
 import InputListTask from '@/components/tasks/forms/InputListTask.vue'
-import FormActions from '@/components/tasks/forms/FormActions.vue'
+import BarButtonsAction from '@/components/shared/BarButtonsAction.vue'
 
 export default {
-  components: { InputListTask, FormActions, BaseCard },
+  components: { InputListTask, BaseCard, BarButtonsAction },
   data() {
     return {
       taskId: '',
@@ -57,10 +57,18 @@ export default {
     <BaseCard class="mb-6">
       <InputListTask v-model="taskData" />
     </BaseCard>
-    <FormActions
-      primary-button-text="Edit task"
-      :is-loading="editingTask.isLoading"
-    />
+    
+    <BarButtonsAction>
+      <v-btn
+      color="success"
+      type="submit"
+      :loading="editingTask.isLoading"
+      :disabled="editingTask.isLoading"
+      depressed
+    >
+      Edit task
+    </v-btn>
+  </BarButtonsAction>
   </v-form>
 </template>
 

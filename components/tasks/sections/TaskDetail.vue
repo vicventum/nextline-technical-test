@@ -8,19 +8,7 @@ export default {
   components: { TaskDetailMetadata, TaskDetailContent, TaskDetailFooter },
   data() {
     return {
-      taskId: 1749,
-      taskData: {
-        id: 0,
-        title: '',
-        isCompleted: false,
-        dueDate: '',
-        description: '',
-        comments: '',
-        tags: [],
-        token: '',
-        createdAt: '',
-        updatedAt: '',
-      },
+      taskId: 0,
     }
   },
   async fetch() {

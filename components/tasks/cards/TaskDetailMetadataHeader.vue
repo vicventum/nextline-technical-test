@@ -1,5 +1,8 @@
 <script>
+import TaskDetailDeadline from '@/components/tasks/details/TaskDetailDeadline.vue'
+
 export default {
+  components: { TaskDetailDeadline,},
   props: {
     isCompleted: {
       type: Boolean,
