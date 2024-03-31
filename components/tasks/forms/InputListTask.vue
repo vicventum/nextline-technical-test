@@ -32,7 +32,7 @@ export default {
 
     <div class="input-list__details">
       <v-checkbox v-model="taskData.isCompleted" label="Complete" />
-      <InputCalendar v-model="taskData" required />
+      <InputCalendar v-model="taskData.dueDate" required />
       <InputTags v-model="taskData.tags" />
     </div>
   </div>

@@ -3,56 +3,32 @@ export default {
   props: {
     // Variable para almacenar el valor implícito del `v-model`
     value: {
-      type: Object,
-      default: () => ({}),
+      type: String,
+      default: '',
     },
   },
   data() {
     return {
-      taskData: this.value,
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
-      dateFormatted: this.formatDate(
-        new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-          .toISOString()
-          .substr(0, 10)
-      ),
       menu: false,
     }
   },
-
-  watch: {
-    value(newValue, oldValue) {
-      this.taskData.dueDate = newValue
-      // const obj = {...this.taskData}
-      // obj.dueDate = newValue
-      // this.taskData = obj
-    },
-    date: {
-      handler(newValue) {
-        this.dateFormatted = this.formatDate(this.date)
-        this.taskData.dueDate = newValue
-        // const obj = {...this.taskData}
-        // obj.dueDate = newValue
-        // this.taskData = obj
+  computed: {
+    dueDate: {
+      get() {
+        return this.value
       },
-      immediate: true,
+      set(val) {
+        this.$emit('input', val)
+      },
     },
   },
 
-  methods: {
-    formatDate(date) {
-      if (!date) return null
-
-      const [year, month, day] = date.split('-')
-      return `${month}/${day}/${year}`
-    },
-    parseDate(date) {
-      if (!date) return null
-
-      const [month, day, year] = date.split('/')
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+  watch: {
+    dueDate: {
+      handler(newValue) {
+        this.dueDate = newValue
+      },
+      immediate: false,
     },
   },
 }
@@ -70,17 +46,17 @@ export default {
   >
     <template #activator="{ on, attrs }">
       <v-text-field
-        v-model="dateFormatted"
+        v-model="dueDate"
         label="Date"
         hint="MM/DD/YYYY format"
         prepend-icon="mdi-calendar"
         v-bind="attrs"
-        @blur="date = parseDate(dateFormatted)"
+        @blur="dueDate = dueDate"
         v-on="on"
       />
     </template>
     <v-date-picker
-      v-model="date"
+      v-model="dueDate"
       no-title
       @input="menu = false"
     ></v-date-picker>
