@@ -1,3 +1,4 @@
+
 <script>
 import TaskActions from '@/components/tasks/sections/TaskActions.vue'
 import TaskList from '@/components/tasks/sections/TaskList.vue'
@@ -9,7 +10,7 @@ export default {
 </script>
 
 <template>
-  <div style="height: 1000vh">
+  <div>
     <TaskActions class="mb-10" />
 
     <TaskList />

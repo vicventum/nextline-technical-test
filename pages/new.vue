@@ -1,5 +1,5 @@
 <script>
-import FormNewTask from '@/components/tasks/forms/FormNewTask.vue'
+import FormNewTask from '@/components/tasks/sections/FormNewTask.vue'
 
 export default {
   components: { FormNewTask },

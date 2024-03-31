@@ -1,5 +1,5 @@
 <script>
-import FormEditTask from '@/components/tasks/forms/FormEditTask.vue'
+import FormEditTask from '@/components/tasks/sections/FormEditTask.vue'
 
 export default {
   components: { FormEditTask },
