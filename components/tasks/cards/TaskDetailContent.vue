@@ -23,7 +23,7 @@ export default {
     <h2 class="text-h6 dark--text text--lighten-3 mb-4">Description</h2>
     <p>{{ description }}</p>
 
-    <v-divider class="my-5" />
+    <v-divider class="mt-12 mb-6" />
 
     <h2 class="text-h6 dark--text text--lighten-3 mb-4">Comments</h2>
     <p>{{ comments }}</p>

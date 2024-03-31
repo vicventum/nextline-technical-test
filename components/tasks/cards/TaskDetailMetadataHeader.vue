@@ -37,7 +37,7 @@ export default {
 
     <v-divider vertical />
 
-    <span class="text-body-2 light--text text--darken-4">
+    <span v-if="dueDate" class="text-body-2 light--text text--darken-4">
       Deadline: {{ dueDate }}
     </span>
   </footer>

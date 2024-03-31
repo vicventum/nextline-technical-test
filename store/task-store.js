@@ -21,7 +21,7 @@ export const state = () => ({
     isLoading: false,
   },
   task: {
-    data: [],
+    data: {},
     isError: false,
     isLoading: false,
   },
@@ -79,7 +79,7 @@ export const actions = {
       context.commit('setTaskLoading', true)
       const rawTask = await getTask(provider, taskId)
 
-      const task = formatTask(rawTask[0])
+      const task = formatTask(rawTask)
       context.commit('setTaskData', task)
       return task
     } catch (error) {
@@ -150,7 +150,8 @@ export const mutations = {
   setCreatingTaskLoading(state, data) {
     state.creatingTask.isLoading = data
   },
-  setdeletingTaskError(state, data) {
+
+  setDeletingTaskError(state, data) {
     state.deletingTask.isError = data
   },
   setDeletingTaskLoading(state, data) {
@@ -167,9 +168,9 @@ export const mutations = {
 
 function formatTaskList(rawTaskList) {
   return rawTaskList.map((task) => ({
-    id: task.id,
+    id: Number(task.id),
     title: task.title,
-    isCompleted: !!task.is_completed,
+    isCompleted: !!Number(task.is_completed),
     dueDate: task.due_date,
     // description: task.description,
     // tags: task.tags?.map(tag => ({text: tag, color: utilRandomColor()})),
@@ -177,15 +178,18 @@ function formatTaskList(rawTaskList) {
 }
 
 function formatTask(rawTask) {
-  const arrayTransformedTags = utilSplitStringByComma(rawTask.tags)
+  const task = Array.isArray(rawTask) ? rawTask[0] : rawTask
+
+  const arrayTransformedTags = utilSplitStringByComma(task.tags)
   const formattedTags = arrayTransformedTags.map((tag) => ({
     text: tag,
     color: utilRandomColor(),
   }))
+
   return {
-    id: rawTask.id,
+    id: Number(rawTask.id),
     title: rawTask.title,
-    isCompleted: !!rawTask.is_completed,
+    isCompleted: !!Number(rawTask.is_completed),
     dueDate: rawTask.due_date,
     description: rawTask.description,
     tags: formattedTags,

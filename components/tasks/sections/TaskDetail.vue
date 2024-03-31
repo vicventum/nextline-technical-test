@@ -25,7 +25,7 @@ export default {
   },
   async fetch() {
     this.taskId = this.$route.params.id
-    this.taskData = { ...(await this.getTask(this.taskId)) }
+    await this.getTask(this.taskId)
   },
   computed: {
     ...mapGetters('task-store', ['task']),
@@ -43,25 +43,25 @@ export default {
         An error has occurred, please try again or reload the page
       </h2>
     </template>
-    <template v-else-if="task.isLoading && !task.data.length">
+    <template v-else-if="task.isLoading && !Object.keys(task.data).length">
       <h2 class="text-center dark--text text--lighten-4 mt-6">Loading...</h2>
     </template>
     <div v-else>
       <TaskDetailMetadata
-        :id="taskData.id"
+        :id="task.data.id"
         class="mb-6"
-        :title="taskData.title"
-        :is-completed="taskData.isCompleted"
-        :due-date="taskData.dueDate"
-        :tags="taskData.tags"
-        :created-at="taskData.createdAt"
+        :title="task.data.title"
+        :is-completed="task.data.isCompleted"
+        :due-date="task.data.dueDate"
+        :tags="task.data.tags"
+        :created-at="task.data.createdAt"
       />
       <TaskDetailContent
         class="mb-6"
-        :description="taskData.description"
-        :comments="taskData.comments"
+        :description="task.data.description"
+        :comments="task.data.comments"
       />
-      <TaskDetailFooter :id="taskData.id" />
+      <TaskDetailFooter :id="task.data.id" />
     </div>
   </div>
 </template>

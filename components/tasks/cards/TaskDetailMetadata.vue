@@ -49,9 +49,10 @@ export default {
       />
       <div class="mb-3">
         <h2 class="text-h5 dark--text text--lighten-3 mb-1">{{ title }}</h2>
-        <h3 class="text-body-2 primary--text text--lighten-1">#{{id}}</h3>
+        <h3 class="text-body-2 primary--text text--lighten-1">#{{ id }}</h3>
       </div>
       <TaskDetailMetadataFooter
+        v-if="tags.length"
         class="task-metadata__footer mb-2"
         :tags="tags"
       />
