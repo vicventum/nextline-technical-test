@@ -15,7 +15,7 @@ export default {
     return {
       taskData: this.value,
       titleRules: [(v) => !!v || 'Title is required'],
-      isCompletedRules: [(v) => !!v || 'Completed is required'],
+      // isCompletedRules: [(v) => !!v || 'Completed is required'],
     }
   },
   watch: {
@@ -38,12 +38,7 @@ export default {
     <v-textarea v-model="taskData.comments" label="Comments" rows="3" />
 
     <div class="input-list__details">
-      <v-checkbox
-        v-model="taskData.isCompleted"
-        :rules="isCompletedRules"
-        label="Complete"
-        required
-      />
+      <v-checkbox v-model="taskData.isCompleted" label="Complete" />
       <InputCalendar v-model="taskData.dueDate" />
       <InputTags v-model="taskData.tags" />
     </div>
