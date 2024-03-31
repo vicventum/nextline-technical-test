@@ -1,7 +1,7 @@
 <script>
 import BaseCard from '@/components/base/BaseCard.vue'
-import TaskDetailMetadataHeader from '@/components/tasks/cards/TaskDetailMetadataHeader.vue'
-import TaskDetailMetadataFooter from '@/components/tasks/cards/TaskDetailMetadataFooter.vue'
+import TaskDetailMetadataHeader from '@/components/tasks/details/TaskDetailMetadataHeader.vue'
+import TaskDetailMetadataFooter from '@/components/tasks/details/TaskDetailMetadataFooter.vue'
 export default {
   components: { BaseCard, TaskDetailMetadataHeader, TaskDetailMetadataFooter },
   props: {
