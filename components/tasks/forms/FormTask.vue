@@ -45,6 +45,9 @@ export default {
   },
   methods: {
     async submit() {
+      const isValidated = this.$refs.form.validate()
+      if (!isValidated) return null
+
       const formattedData = {
         title: this.data.title,
         is_completed: this.data.isCompleted ? '1' : '0',
@@ -66,7 +69,7 @@ export default {
 </script>
 
 <template>
-  <v-form class="form" @submit.prevent="submit">
+  <v-form ref="form" class="form" @submit.prevent="submit">
     <BaseCard class="mb-6">
       <InputListTask v-model="data" />
     </BaseCard>
