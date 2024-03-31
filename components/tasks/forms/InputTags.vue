@@ -1,50 +1,49 @@
 <script>
+import { COLORS } from '@/utils'
+
 export default {
   props: {
     value: {
-      type: Object,
-      default: () => ({}),
+      type: Array,
+      default: () => [],
     },
   },
   data() {
     return {
-      taskData: this.value,
-      colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
+      colors: COLORS,
       items: [{ header: 'Select an option or create one' }],
       nonce: 1,
-      model: this.value?.tags,
-      // model: ['a','b','c'],
       search: null,
     }
   },
-
-  watch: {
-    value: {
-      handler(newValue, oldValue) {
-        // this.model = newValue.tags
-        this.taskData.tags = this.model
-        // if (!this.model.length && oldValue) this.model = newValue.tags
-        // console.log(
-        //   '🚀 ~ handler ~ this.model:',
-        //   !this.model.length,
-        //   this.model,
-        //   newValue.tags,
-        //   newValue
-        // )
+  computed: {
+    tags: {
+      get() {
+        return this.value
       },
-      immediate: true,
+      set(val) {
+        this.$emit('input', val)
+      },
     },
-    model: {
+  },
+  watch: {
+    tags: {
       handler(newValue, oldValue) {
-        // console.log('🚀🚀 ~ handler ~ oldValue:', oldValue, this.model, newValue.tags)
-        if (newValue.length === oldValue?.length) return
+        if (newValue?.length === oldValue?.length) return null
+        console.log('🚀 ~ handler ~ newValue:', newValue)
 
-        this.model = newValue.map((v) => {
+        this.tags = newValue.map((v) => {
           if (typeof v === 'string') {
             v = {
               text: v,
               color: this.colors[this.nonce - 1],
             }
+            console.log(
+              '🚀 ~ this.tags=newValue.map ~ this.colors[this.nonce - 1]:',
+              this.colors,
+              this.nonce,
+              this.colors[this.nonce - 1]
+            )
 
             this.items.push(v)
 
@@ -53,9 +52,8 @@ export default {
 
           return v
         })
-        this.taskData.tags = this.model
       },
-      immediate: true,
+      immediate: false,
     },
   },
 }
@@ -63,7 +61,7 @@ export default {
 
 <template>
   <v-combobox
-    v-model="model"
+    v-model="tags"
     :hide-no-data="!search"
     :items="items"
     :search-input.sync="search"
@@ -76,7 +74,7 @@ export default {
     <template #no-data>
       <v-list-item>
         <span class="subheading mr-2">Create </span>
-        <v-chip :color="`${colors[nonce - 1]} lighten-3`" label small>
+        <v-chip :color="`${colors[nonce - 1]}`" label small dark>
           {{ search }}
         </v-chip>
       </v-list-item>
@@ -85,10 +83,11 @@ export default {
       <v-chip
         v-if="item === Object(item)"
         v-bind="attrs"
-        :color="`${item.color} lighten-3`"
+        :color="`${item.color}`"
         :input-value="selected"
         label
         small
+        dark
       >
         <span class="pr-2">
           {{ item.text }}

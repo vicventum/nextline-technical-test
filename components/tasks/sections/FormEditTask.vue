@@ -17,7 +17,7 @@ export default {
     ...mapGetters('task-store', ['task', 'editingTask']),
   },
   methods: {
-    ...mapActions('task-store', ['editTask']),
+    ...mapActions('task-store', ['editTask', 'getTask']),
     async submit(data) {
       await this.editTask({ taskId: this.taskId, newData: data })
 

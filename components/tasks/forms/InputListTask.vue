@@ -19,8 +19,6 @@ export default {
   watch: {
     value(newValue, oldValue) {
       this.taskData = newValue
-      // this.$emit('input', newValue)
-      // this.$emit('close', false)
     },
   },
 }
@@ -35,7 +33,7 @@ export default {
     <div class="input-list__details">
       <v-checkbox v-model="taskData.isCompleted" label="Complete" />
       <InputCalendar v-model="taskData" required />
-      <InputTags v-model="taskData" />
+      <InputTags v-model="taskData.tags" />
     </div>
   </div>
 </template>

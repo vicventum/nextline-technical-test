@@ -35,8 +35,13 @@ export default {
       data: {},
     }
   },
-  created() {
-    this.data = { ...this.taskData }
+  watch: {
+    taskData: {
+      handler(newTaskData) {
+        this.data = { ...newTaskData }
+      },
+      immediate: true,
+    },
   },
   methods: {
     async submit() {
