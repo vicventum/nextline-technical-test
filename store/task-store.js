@@ -13,7 +13,10 @@ import {
   editTask,
 } from '@/components/tasks/services/task-service.js'
 import { utilRandomColor, utilSplitStringByComma } from '@/utils'
-import { utilSortTasksAlpha } from '@/components/tasks/utils'
+import {
+  utilSortTasksAlpha,
+  utilSortTasksCreatedDate,
+} from '@/components/tasks/utils'
 
 export const state = () => ({
   taskList: {
@@ -56,10 +59,22 @@ export const getters = {
     return state.taskList
   },
   taskListAlphaAscending(state) {
-    return utilSortTasksAlpha({taskList: state.taskList})
+    return utilSortTasksAlpha({ taskList: state.taskList.data })
   },
   taskListAlphaDescending(state) {
-    return utilSortTasksAlpha({taskList: state.taskList, ascending: false})
+    return utilSortTasksAlpha({
+      taskList: state.taskList.data,
+      ascending: false,
+    })
+  },
+  taskListCreatedDateAscending(state) {
+    return utilSortTasksCreatedDate({ taskList: state.taskList.data })
+  },
+  taskListCreatedDateDescending(state) {
+    return utilSortTasksCreatedDate({
+      taskList: state.taskList.data,
+      ascending: false,
+    })
   },
   task(state) {
     return state.task

@@ -1,5 +1,5 @@
 export function utilSortTasksAlpha({ taskList, ascending = true }) {
-  return taskList.sort((a, b) => {
+  return [...taskList].sort((a, b) => {
     const titleA = a.title.toUpperCase()
     const titleB = b.title.toUpperCase()
 
@@ -8,4 +8,7 @@ export function utilSortTasksAlpha({ taskList, ascending = true }) {
 
     return 0
   })
+}
+export function utilSortTasksCreatedDate({ taskList, ascending = true }) {
+  return ascending ? [...taskList] : taskList.toReversed()
 }

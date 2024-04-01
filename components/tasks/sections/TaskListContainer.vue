@@ -6,11 +6,27 @@ import ErrorHandler from '@/components/shared/ErrorHandler.vue'
 
 export default {
   components: { TaskActions, TaskList, ErrorHandler },
+  data() {
+    return {
+      taskListUpdated: [],
+    }
+  },
   async fetch() {
     await this.fetchTaskList()
   },
   computed: {
-    ...mapGetters('task-store', ['taskList']),
+    ...mapGetters('task-store', [
+      'taskList',
+      'taskListAlphaAscending',
+      'taskListAlphaDescending',
+      'taskListCreatedDateAscending',
+      'taskListCreatedDateDescending',
+    ]),
+  },
+  watch: {
+    'taskList.data'(newValue, oldValue) {
+      this.taskListUpdated = this.taskListCreatedDateAscending
+    },
   },
   methods: {
     ...mapActions('task-store', ['fetchTaskList', 'deleteTask']),
@@ -21,20 +37,34 @@ export default {
       await this.deleteTask(taskId)
       await this.fetchTaskList()
     },
+    changeAlphaOrder(isAscending) {
+      this.taskListUpdated = isAscending
+        ? this.taskListAlphaAscending
+        : this.taskListAlphaDescending
+    },
+    changeCreatedDateOrder(isAscending) {
+      this.taskListUpdated = isAscending
+        ? this.taskListCreatedDateAscending
+        : this.taskListCreatedDateDescending
+    },
   },
 }
 </script>
 
 <template>
   <div>
-    <TaskActions class="mb-10" />
+    <TaskActions
+      class="mb-10"
+      @change-alpha-order="changeAlphaOrder"
+      @change-created-date-order="changeCreatedDateOrder"
+    />
 
     <ErrorHandler
       :is-loading="taskList.isLoading"
       :is-error="taskList.isError"
-      :is-empty="!taskList.data.length"
+      :is-empty="!taskListUpdated.length"
     >
-      <TaskList :task-list="taskList.data" @delete-task="removeTask" />
+      <TaskList :task-list="taskListUpdated" @delete-task="removeTask" />
     </ErrorHandler>
   </div>
 </template>

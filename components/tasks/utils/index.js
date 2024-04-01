@@ -1,3 +1,3 @@
-import { utilSortTasksAlpha } from './util-filters'
+import { utilSortTasksAlpha, utilSortTasksCreatedDate } from './util-filters'
 
-export { utilSortTasksAlpha, }
+export { utilSortTasksAlpha, utilSortTasksCreatedDate }
