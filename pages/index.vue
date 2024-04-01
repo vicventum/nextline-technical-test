@@ -1,19 +1,15 @@
-
 <script>
-import TaskActions from '@/components/tasks/sections/TaskActions.vue'
-import TaskList from '@/components/tasks/sections/TaskList.vue'
+import TaskListContainer from '@/components/tasks/sections/TaskListContainer.vue'
 
 export default {
   name: 'IndexPage',
-  components: { TaskActions, TaskList },
+  components: { TaskListContainer },
 }
 </script>
 
 <template>
   <div>
-    <TaskActions class="mb-10" />
-
-    <TaskList />
+    <TaskListContainer />
   </div>
 </template>
 

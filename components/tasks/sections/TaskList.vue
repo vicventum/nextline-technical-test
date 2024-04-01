@@ -1,66 +1,43 @@
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import TaskCard from '@/components/tasks/cards/TaskCard.vue'
 
 export default {
   components: { TaskCard },
-  async fetch() {
-    await this.fetchTaskList()
+  props: {
+    taskList: {
+      type: Array,
+      default: () => [],
+    },
   },
-  computed: {
-    ...mapGetters('task-store', ['taskList']),
-  },
+  emits: ['delete-task'],
   methods: {
-    ...mapActions('task-store', ['fetchTaskList', 'deleteTask']),
-    async removeTask(taskId) {
-      // TODO: Crear un modal personalizado
-      const confirm = window.confirm('You want delete this task?')
-      if (!confirm) return null
-      await this.deleteTask(taskId)
-      await this.fetchTaskList()
+    deleteTask(taskId) {
+      this.$emit('delete-task', taskId)
     },
   },
 }
 </script>
 
 <template>
-  <section class="task-list">
-    <template v-if="taskList.isError">
-      <h2 class="text-center dark--text text--lighten-4 mt-6">
-        An error has occurred, please try again or reload the page
-      </h2>
-    </template>
-    <template v-else-if="taskList.isLoading && !taskList.data.length">
-      <h2 class="text-center dark--text text--lighten-4 mt-6">Loading...</h2>
-    </template>
-    <template v-else-if="!taskList.data.length">
-      <h2 class="text-center dark--text text--lighten-4 mt-6">
-        There are no tasks to display. Create one!
-      </h2>
-    </template>
-
-    <transition-group v-else name="list" class="task-list__content" tag="div">
-      <TaskCard
-        v-for="task in taskList.data"
-        :id="task.id"
-        :key="task.id"
-        :title="task.title"
-        :is-completed="task.isCompleted"
-        :due-date="task.dueDate"
-        class="task"
-        @delete="removeTask"
-      />
-    </transition-group>
-  </section>
+  <transition-group name="list" class="task-list" tag="div">
+    <TaskCard
+      v-for="task in taskList"
+      :id="task.id"
+      :key="task.id"
+      :title="task.title"
+      :is-completed="task.isCompleted"
+      :due-date="task.dueDate"
+      class="task"
+      @delete="deleteTask"
+    />
+  </transition-group>
 </template>
 
 <style lang="scss" scoped>
 .task-list {
-  &__content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
-  }
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
 }
 
 // .list-enter-active {
