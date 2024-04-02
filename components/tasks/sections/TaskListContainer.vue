@@ -34,7 +34,10 @@ export default {
       // TODO: Crear un modal personalizado
       const confirm = window.confirm('You want delete this task?')
       if (!confirm) return null
+
       await this.deleteTask(taskId)
+      this.$toast.success('Task deleted successfully')
+
       await this.fetchTaskList()
     },
     changeAlphaOrder(isAscending) {

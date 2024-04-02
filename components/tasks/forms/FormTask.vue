@@ -46,7 +46,10 @@ export default {
   methods: {
     async submit() {
       const isValidated = this.$refs.form.validate()
-      if (!isValidated) return null
+      if (!isValidated) {
+        this.$toast.warning('Title is required')
+        return null
+      }
 
       const formattedData = {
         title: this.data.title,

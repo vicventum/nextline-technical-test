@@ -26,3 +26,28 @@ p {
 .pages-leave-active {
   animation: fade 0.15s ease-out reverse;
 }
+
+// .toast {
+//   background-color: var(--v-primary-lighten1) !important;
+//   &--success {
+//     background-color: var(--v-success-base) !important;
+//   }
+//   &--warning {
+//     background-color: var(--v-warning-base) !important;
+//   }
+//   &--error {
+//     background-color: var(--v-error-lighten1) !important;
+//   }
+// }
+
+.Vue-Toastification {
+  &__toast--success {
+    background-color: var(--v-success-base) !important;
+  }
+  &__toast--warning {
+    background-color: var(--v-warning-base) !important;
+  }
+  &__toast--error {
+    background-color: var(--v-error-lighten1) !important;
+  }
+}

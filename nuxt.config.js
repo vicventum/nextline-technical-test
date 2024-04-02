@@ -11,7 +11,7 @@ export default {
     API_URL: process.env.API_URL,
     TOKEN_API: process.env.TOKEN_API,
   },
-  
+
   privateRuntimeConfig: {
     API_URL: process.env.API_URL,
     TOKEN_API: process.env.TOKEN_API,
@@ -37,7 +37,10 @@ export default {
   css: ['~/assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/axios-port.js'],
+  plugins: [
+    '~/plugins/axios-port.js',
+    // { src: '~/plugins/vue-toastification', ssr: false },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: {
@@ -61,12 +64,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    "vue-toastification/nuxt",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: process.env.API_URL,
-		browserBaseURL: process.env.API_URL,
+    browserBaseURL: process.env.API_URL,
     headers: {
       Authorization: process.env.TOKEN_API,
     },
@@ -111,10 +115,15 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-	loading: { color: '#80CBC', height: '4px', continuous: false },
+  loading: { color: '#80CBC', height: '4px', continuous: false },
 
   transition: {
-		name: 'pages',
-		mode: 'out-in',
-	},
+    name: 'pages',
+    mode: 'out-in',
+  },
+
+  toast: {
+    // Use your own CSS file
+    cssFile: 'vue-toastification/dist/index.css',
+  }
 }

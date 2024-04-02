@@ -1,3 +1,4 @@
+@import '~vuetify/src/styles/settings/_variables';
 // Ref: https://github.com/nuxt-community/vuetify-module#customvariables
 //
 // The variables you want to modify
@@ -18,5 +19,20 @@ $button-elevation: (
   'hover': 2,
   'active': 4,
 );
+
+
+// Usa media queries con los breakpoints de Vuetify
+$xs-only: #{map-get($display-breakpoints, 'xs-only')};
+$sm-only: #{map-get($display-breakpoints, 'sm-only')};
+$sm-and-down: #{map-get($display-breakpoints, 'sm-and-down')};
+$sm-and-up: #{map-get($display-breakpoints, 'sm-and-up')};
+$md-only: #{map-get($display-breakpoints, 'md-only')};
+$md-and-down: #{map-get($display-breakpoints, 'md-and-down')};
+$md-and-up: #{map-get($display-breakpoints, 'md-and-up')};
+$lg-only: #{map-get($display-breakpoints, 'lg-only')};
+$lg-and-down: #{map-get($display-breakpoints, 'lg-and-down')};
+$lg-and-up: #{map-get($display-breakpoints, 'lg-and-up')};
+$xl-only: #{map-get($display-breakpoints, 'xl-only')};
+
 
 @import '~vuetify/src/styles/styles.sass';

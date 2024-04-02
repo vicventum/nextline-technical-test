@@ -12,6 +12,11 @@ export default {
     async submit(data) {
       await this.createTask(data)
 
+      this.$toast.success('Task created successfully')
+      // this.$toast('Task created successfully', {
+      //   toastClassName: 'toast--success',
+      // })
+
       // this.$router.push('/')
     },
   },

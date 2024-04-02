@@ -20,6 +20,7 @@ export default {
     ...mapActions('task-store', ['editTask', 'getTask']),
     async submit(data) {
       await this.editTask({ taskId: this.taskId, newData: data })
+      this.$toast.success('Task edited successfully')
 
       // this.$router.push('/')
     },
