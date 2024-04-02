@@ -36,6 +36,11 @@ export default {
       required: false,
     },
   },
+  computed: {
+    smAndUp() {
+      return this.$vuetify.breakpoint.smAndUp
+    },
+  },
 }
 </script>
 
@@ -57,7 +62,7 @@ export default {
         :tags="tags"
       />
     </div>
-    <div class="task-metadata__actions">
+    <div v-if="smAndUp" class="task-metadata__actions">
       <v-btn :to="`/edit/${id}`" color="warning" depressed>Edit task</v-btn>
     </div>
   </BaseCard>

@@ -41,6 +41,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
 
   &__content {
     display: flex;

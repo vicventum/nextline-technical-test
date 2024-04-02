@@ -52,9 +52,13 @@ export default {
 
   &__details {
     display: grid;
-    grid-template-columns: auto auto 60%;
-    align-items: flex-end;
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    
+    @media #{$sm-and-up} {
+      grid-template-columns: auto auto 60%;
+      align-items: flex-end;
+      gap: 1rem;
+    }
   }
 }
 </style>

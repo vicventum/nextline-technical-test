@@ -46,7 +46,7 @@ export default {
 
     <template v-if="dueDate" >
 			<v-divider vertical />
-			<span class="text-body-2 light--text text--darken-4">
+			<span class="text-caption text-sm-body-2 light--text text--darken-4">
 				Deadline: {{ dueDate }}
 			</span>
 		</template>
@@ -58,6 +58,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  
+  @media #{$sm-and-up} {
+    gap: 1rem;
+	}
 }
 </style>
