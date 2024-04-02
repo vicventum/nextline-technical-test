@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[34],{603:function(n,e,t){"use strict";t.r(e);var o={name:"IndexPage",components:{TaskListContainer:t(597).default}},r=t(64),component=Object(r.a)(o,(function(){var n=this._self._c;return n("div",[n("TaskListContainer")],1)}),[],!1,null,"b42e7802",null);e.default=component.exports}}]);

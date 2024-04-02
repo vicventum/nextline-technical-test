@@ -55,7 +55,7 @@ export default {
         title: this.data.title,
         is_completed: this.data.isCompleted ? '1' : '0',
         description: this.data.description,
-        due_date: this.data.dueDate,
+        due_date: this.data.dueDate ? this.data.dueDate : null,
         comments: this.data.comments,
         tags: this.getTextValuesAsString(this.data.tags),
         token: this.data.token,
