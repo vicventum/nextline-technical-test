@@ -3,7 +3,6 @@ let task = {}
 
 export async function getTaskList(getAll) {
   taskList = await getAll()
-  console.log('🚀 ~ getTaskList ~ getAll():',taskList)
 
   return taskList
 }

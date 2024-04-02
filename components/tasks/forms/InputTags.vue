@@ -30,7 +30,6 @@ export default {
     tags: {
       handler(newValue, oldValue) {
         if (newValue?.length === oldValue?.length) return null
-        console.log('🚀 ~ handler ~ newValue:', newValue)
 
         this.tags = newValue.map((v) => {
           if (typeof v === 'string') {
@@ -38,12 +37,6 @@ export default {
               text: v,
               color: this.colors[this.nonce - 1],
             }
-            console.log(
-              '🚀 ~ this.tags=newValue.map ~ this.colors[this.nonce - 1]:',
-              this.colors,
-              this.nonce,
-              this.colors[this.nonce - 1]
-            )
 
             this.items.push(v)
 

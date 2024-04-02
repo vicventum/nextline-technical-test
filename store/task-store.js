@@ -97,7 +97,6 @@ export const actions = {
       context.commit('setTaskListLoading', true)
       const rawTaskList = await getTaskList(provider)
       context.commit('setTaskListLoading', false)
-      console.log('🚀 ~ fetchTaskList ~ rawTaskList:', rawTaskList)
 
       const taskList = formatTaskList(rawTaskList)
       context.commit('setTaskListData', taskList)
@@ -171,7 +170,6 @@ export const mutations = {
     state.taskList.isError = data
   },
   setTaskListLoading(state, data) {
-    console.log('🚀 ~ setTaskListLoading ~ data:', data)
     state.taskList.isLoading = data
   },
   setTaskData(state, data) {
@@ -227,16 +225,16 @@ function formatTask(rawTask) {
   }))
 
   return {
-    id: Number(rawTask.id),
-    title: rawTask.title,
-    isCompleted: !!Number(rawTask.is_completed),
-    dueDate: rawTask.due_date,
-    description: rawTask.description,
+    id: Number(task.id),
+    title: task.title,
+    isCompleted: !!Number(task.is_completed),
+    dueDate: task.due_date,
+    description: task.description,
     tags: formattedTags,
-    comments: rawTask.comments,
-    token: rawTask.token,
-    createdAt: rawTask.created_at,
-    updatedAt: rawTask.updated_at,
+    comments: task.comments,
+    token: task.token,
+    createdAt: task.created_at,
+    updatedAt: task.updated_at,
   }
 }
 
