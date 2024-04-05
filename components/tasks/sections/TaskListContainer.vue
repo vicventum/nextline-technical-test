@@ -9,8 +9,7 @@ export default {
   components: { TaskActions, TaskList, ErrorHandler },
   mixins: [MixinTaskList],
   data() {
-    return {
-    }
+    return {}
   },
   methods: {
     ...mapActions('task-store', ['deleteTask']),
