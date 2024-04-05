@@ -10,19 +10,7 @@ export default {
   mixins: [MixinTaskList],
   data() {
     return {
-      // taskListUpdated: [],
     }
-  },
-  async fetch() {
-    // await this.fetchTaskList()
-  },
-  computed: {
-    // ...mapGetters('task-store', ['taskList']),
-  },
-  watch: {
-    // 'taskList.data'(newValue, oldValue) {
-    //   this.taskListUpdated = this.taskListCreatedDateAscending
-    // },
   },
   methods: {
     ...mapActions('task-store', ['deleteTask']),
@@ -36,16 +24,6 @@ export default {
 
       await this.fetchTaskList()
     },
-    // changeAlphaOrder(isAscending) {
-    //   this.taskListUpdated = isAscending
-    //     ? this.taskListAlphaAscending
-    //     : this.taskListAlphaDescending
-    // },
-    // changeCreatedDateOrder(isAscending) {
-    //   this.taskListUpdated = isAscending
-    //     ? this.taskListCreatedDateAscending
-    //     : this.taskListCreatedDateDescending
-    // },
   },
 }
 </script>
@@ -61,9 +39,8 @@ export default {
     <ErrorHandler
       :is-loading="mixinTaskList.isLoading"
       :is-error="mixinTaskList.isError"
-      :is-empty="!true"
+      :is-empty="!mixinTaskList.data.length"
     >
-      <!-- :is-empty="!mixinTaskList.data.length" -->
       <TaskList :task-list="mixinTaskList.data" @delete-task="removeTask" />
     </ErrorHandler>
   </div>

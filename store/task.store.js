@@ -126,7 +126,6 @@ export const actions = {
 
 export const mutations = {
   setTaskList(state, data) {
-    console.log('🚀 ~ setTaskList ~ data:', data)
     state.taskList = data
   },
   setTaskData(state, data) {

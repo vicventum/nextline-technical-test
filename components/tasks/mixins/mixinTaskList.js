@@ -5,89 +5,55 @@ import { getTaskList } from '@/components/tasks/services/task-service.js'
 import {
   utilSortTasksAlpha,
   utilSortTasksCreatedDate,
+  utilFormatTaskList,
 } from '@/components/tasks/utils'
 
-// Definir el mixin
 const mixinTaskList = {
   data() {
     return {
-      // taskList: {
-      //   data: [],
-      //   isError: false,
-      //   isLoading: false,
-      // },
-      ataskList: [],
-      ataskListOrders: {},
-      aisError: false,
-      aisLoading: false,
+      taskListUpdated: [],
+      taskListOrders: {},
+      isError: false,
+      isLoading: false,
     }
   },
-  // async fetch() {
-  //   await this.mixinGetTaskList()
-  // },
-  async created() {
+  async fetch() {
     await this.mixinGetTaskList()
   },
   computed: {
     ...mapGetters('task.store', ['taskList']),
     mixinTaskList() {
-      console.log('🚀 ~ mixinTaskList ~ this.ataskList:', this.ataskList)
       return {
-        data: this.ataskList,
-        isLoading: this.aisLoading,
-        isError: this.aisError,
+        data: this.taskListUpdated,
+        isLoading: this.isLoading,
+        isError: this.isError,
       }
     },
-    // _taskListAlphaAscending(state) {
-    //   return utilSortTasksAlpha({ taskList: this.taskList })
-    // },
-    // _taskListAlphaDescending(state) {
-    //   return utilSortTasksAlpha({
-    //     taskList: this.taskList,
-    //     ascending: false,
-    //   })
-    // },
-    // _taskListCreatedDateAscending(state) {
-    //   return utilSortTasksCreatedDate({ taskList: this.taskList })
-    // },
-    // _taskListCreatedDateDescending(state) {
-    //   return utilSortTasksCreatedDate({
-    //     taskList: this.taskList,
-    //     ascending: false,
-    //   })
-    // },
-    // taskList() {
-    //   return this.store.jobList
-    // },
-    // error() {
-    //   return this.store.error
-    // },
-    // isLoading() {
-    //   return this.store.pending
-    // },
-    // isError() {
-    //   return !!this.store.error
-    // },
   },
   watch: {
     taskList(newTaskList, oldValue) {
-      this.ataskList = newTaskList
-      console.log('🚀 ~ taskList ~ newTaskList:', newTaskList, this.ataskList)
+      const taskListCreatedAtAscendingOrder = utilSortTasksCreatedDate({
+        taskList: this.taskList,
+      })
 
-      this.ataskListOrders = {
+      this.taskListUpdated = taskListCreatedAtAscendingOrder
+
+      this.taskListOrders = {
         alphaAscending: utilSortTasksAlpha({ taskList: newTaskList }),
         alphaDescending: utilSortTasksAlpha({
           taskList: this.taskList,
           ascending: false,
         }),
-        createdDateAscending: utilSortTasksCreatedDate({
-          taskList: this.taskList,
-        }),
+        createdDateAscending: taskListCreatedAtAscendingOrder,
         createdDateDescending: utilSortTasksCreatedDate({
           taskList: this.taskList,
           ascending: false,
         }),
       }
+    },
+
+    mixinTaskList(newTaskList, oldValue) {
+      console.log('🚀 ~ taskList ~ newTaskList:', newTaskList)
     },
   },
   methods: {
@@ -95,39 +61,27 @@ const mixinTaskList = {
     async mixinGetTaskList() {
       const provider = getAll
       try {
-        this.aisLoading = true
+        this.isLoading = true
         const rawTaskList = await getTaskList(provider)
-        console.log('🚀 ~ mixinGetTaskList ~ rawTaskList:', rawTaskList)
-        this.aisLoading = false
+        this.isLoading = false
 
-        const taskList = this.aformatTaskList(rawTaskList)
+        const taskList = utilFormatTaskList(rawTaskList)
         this.setTaskList(taskList)
       } catch (error) {
         console.error(error)
-        this.aisError = true
-        this.aisLoading = false
+        this.isError = true
+        this.isLoading = false
       }
     },
-    aformatTaskList(rawTaskList) {
-      return rawTaskList.map((task) => ({
-        id: Number(task.id),
-        title: task.title,
-        isCompleted: !!Number(task.is_completed),
-        dueDate: task.due_date,
-        // description: task.description,
-        // tags: task.tags?.map(tag => ({text: tag, color: utilRandomColor()})),
-      }))
-    },
-
     mixinChangeAlphaOrder(isAscending) {
-      this.ataskList = isAscending
-        ? this.ataskListOrders.alphaAscending
-        : this.ataskListOrders.alphaDescending
+      this.taskListUpdated = isAscending
+        ? this.taskListOrders.alphaAscending
+        : this.taskListOrders.alphaDescending
     },
     mixinChangeCreatedDateOrder(isAscending) {
-      this.ataskList = isAscending
-        ? this.ataskListOrders.createdDateAscending
-        : this.ataskListOrders.createdDateDescending
+      this.taskListUpdated = isAscending
+        ? this.taskListOrders.createdDateAscending
+        : this.taskListOrders.createdDateDescending
     },
   },
 }
