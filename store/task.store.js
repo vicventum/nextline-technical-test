@@ -1,21 +1,13 @@
 import {
-  getAll,
   create,
   remove,
-  get,
   edit,
 } from '@/components/tasks/services/providers/task-axios-provider.js'
 import {
-  getTaskList,
   createTask,
   deleteTask,
-  getTask,
   editTask,
 } from '@/components/tasks/services/task-service.js'
-import {
-  utilSortTasksAlpha,
-  utilSortTasksCreatedDate,
-} from '@/components/tasks/utils'
 
 export const state = () => ({
   taskList: [],
@@ -30,10 +22,6 @@ export const state = () => ({
     token: '',
     createdAt: '',
     updatedAt: '',
-  },
-  creatingTask: {
-    isError: false,
-    isLoading: false,
   },
   deletingTask: {
     isError: false,
@@ -52,9 +40,6 @@ export const getters = {
   task(state) {
     return state.task
   },
-  creatingTask(state) {
-    return state.creatingTask
-  },
   deletingTask(state) {
     return state.deletingTask
   },
@@ -64,19 +49,6 @@ export const getters = {
 }
 
 export const actions = {
-  async createTask(context, taskId) {
-    const provider = create
-    try {
-      context.commit('setCreatingTaskLoading', true)
-      await createTask(provider, taskId)
-      context.commit('setCreatingTaskLoading', false)
-      // await context.dispatch('fetchTaskList')
-    } catch (error) {
-      console.error(error)
-      context.commit('setCreatingTaskError', true)
-      context.commit('setCreatingTaskLoading', false)
-    }
-  },
   async deleteTask(context, taskId) {
     const provider = remove
     try {
@@ -109,22 +81,6 @@ export const mutations = {
   },
   setTask(state, data) {
     state.task = data
-  },
-  setTaskData(state, data) {
-    state.task.data = data
-  },
-  setTaskError(state, data) {
-    state.task.isError = data
-  },
-  setTaskLoading(state, data) {
-    state.task.isLoading = data
-  },
-
-  setCreatingTaskError(state, data) {
-    state.creatingTask.isError = data
-  },
-  setCreatingTaskLoading(state, data) {
-    state.creatingTask.isLoading = data
   },
 
   setDeletingTaskError(state, data) {

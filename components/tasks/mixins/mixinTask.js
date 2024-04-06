@@ -3,7 +3,7 @@ import { get } from '@/components/tasks/services/providers/task-axios-provider.j
 import { getTask } from '@/components/tasks/services/task-service.js'
 import { utilFormatTask } from '@/components/tasks/utils'
 
-const mixinTaskList = {
+const mixinTask = {
   data() {
     return {
       mixinTask: {
@@ -45,4 +45,4 @@ const mixinTaskList = {
   },
 }
 
-export default mixinTaskList
+export default mixinTask
