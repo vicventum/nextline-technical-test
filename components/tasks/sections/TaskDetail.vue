@@ -21,6 +21,7 @@ export default {
     <ErrorHandler
       :is-loading="mixinTask.isLoading"
       :is-error="mixinTask.isError"
+      :is-empty="!mixinTask.data.id"
     >
       <TaskDetailMetadata
         :id="mixinTask.data.id"

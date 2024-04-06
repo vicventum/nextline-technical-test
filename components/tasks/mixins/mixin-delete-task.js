@@ -1,5 +1,5 @@
-import { create } from '@/components/tasks/services/providers/task-axios-provider.js'
-import { createTask } from '@/components/tasks/services/task-service.js'
+import { remove } from '@/components/tasks/services/providers/task-axios-provider.js'
+import { deleteTask } from '@/components/tasks/services/task-service.js'
 
 const mixinDeleteTask = {
   data() {
@@ -11,16 +11,16 @@ const mixinDeleteTask = {
     }
   },
   methods: {
-    async mixinDeleteTask(task) {
-      const provider = create
+    async mixinDeleteTask(taskId) {
+      const provider = remove
       try {
-        this.mixinCreatingTask.isLoading = true
-        await createTask(provider, task)
-        this.mixinCreatingTask.isLoading = false
+        this.mixinDeletingTask.isLoading = true
+        await deleteTask(provider, taskId)
+        this.mixinDeletingTask.isLoading = false
       } catch (error) {
         console.error(error)
-        this.mixinCreatingTask.isError = true
-        this.mixinCreatingTask.isLoading = false
+        this.mixinDeletingTask.isError = true
+        this.mixinDeletingTask.isLoading = false
       }
     },
   },

@@ -129,5 +129,6 @@ export default {
   toast: {
     // Use your own CSS file
     cssFile: 'vue-toastification/dist/index.css',
+    timeout: 3000,
   }
 }

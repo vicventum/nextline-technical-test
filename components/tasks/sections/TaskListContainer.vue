@@ -3,11 +3,11 @@ import { mapActions } from 'vuex'
 import TaskActions from '@/components/tasks/sections/TaskActions.vue'
 import TaskList from '@/components/tasks/sections/TaskList.vue'
 import ErrorHandler from '@/components/shared/ErrorHandler.vue'
-import { MixinTaskList } from '@/components/tasks/mixins'
+import { MixinTaskList, MixinDeleteTask } from '@/components/tasks/mixins'
 
 export default {
   components: { TaskActions, TaskList, ErrorHandler },
-  mixins: [MixinTaskList],
+  mixins: [MixinTaskList, MixinDeleteTask],
   data() {
     return {}
   },
@@ -18,10 +18,10 @@ export default {
       const confirm = window.confirm('You want delete this task?')
       if (!confirm) return null
 
-      await this.deleteTask(taskId)
+      await this.mixinDeleteTask(taskId)
       this.$toast.success('Task deleted successfully')
 
-      await this.fetchTaskList()
+      await this.mixinGetTaskList()
     },
   },
 }
