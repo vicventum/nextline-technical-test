@@ -3,7 +3,7 @@ import ErrorHandler from '@/components/shared/ErrorHandler.vue'
 import TaskDetailMetadata from '@/components/tasks/details/TaskDetailMetadata.vue'
 import TaskDetailContent from '@/components/tasks/details/TaskDetailContent.vue'
 import TaskDetailFooter from '@/components/tasks/details/TaskDetailFooter.vue'
-import MixinTask from '@/components/tasks/mixins/mixinTask.js'
+import { MixinTask } from '@/components/tasks/mixins'
 
 export default {
   components: {

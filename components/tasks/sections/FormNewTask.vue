@@ -1,6 +1,6 @@
 <script>
 import FormTask from '@/components/tasks/forms/FormTask.vue'
-import MixinCreateTask from '@/components/tasks/mixins/MixinCreateTask.js'
+import { MixinCreateTask } from '@/components/tasks/mixins'
 
 export default {
   components: { FormTask },

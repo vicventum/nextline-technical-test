@@ -1,7 +1,7 @@
 import { create } from '@/components/tasks/services/providers/task-axios-provider.js'
 import { createTask } from '@/components/tasks/services/task-service.js'
 
-const mixinTaskList = {
+const mixinCreateTask = {
   data() {
     return {
       mixinCreatingTask: {
@@ -26,4 +26,4 @@ const mixinTaskList = {
   },
 }
 
-export default mixinTaskList
+export default mixinCreateTask

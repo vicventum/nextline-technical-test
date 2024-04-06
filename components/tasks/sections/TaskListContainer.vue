@@ -3,7 +3,7 @@ import { mapActions } from 'vuex'
 import TaskActions from '@/components/tasks/sections/TaskActions.vue'
 import TaskList from '@/components/tasks/sections/TaskList.vue'
 import ErrorHandler from '@/components/shared/ErrorHandler.vue'
-import MixinTaskList from '@/components/tasks/mixins/mixinTaskList.js'
+import { MixinTaskList } from '@/components/tasks/mixins'
 
 export default {
   components: { TaskActions, TaskList, ErrorHandler },
