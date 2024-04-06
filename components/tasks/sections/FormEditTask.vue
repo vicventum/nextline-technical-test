@@ -1,28 +1,15 @@
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import FormTask from '@/components/tasks/forms/FormTask.vue'
+import { MixinTask, MixinEditTask } from '@/components/tasks/mixins'
 
 export default {
   components: { FormTask },
-  data() {
-    return {
-      taskId: '',
-    }
-  },
-  async fetch() {
-    this.taskId = this.$route.params.id
-    await this.getTask(this.taskId)
-  },
-  computed: {
-    ...mapGetters('task-store', ['task', 'editingTask']),
-  },
+  mixins: [MixinTask, MixinEditTask],
   methods: {
-    ...mapActions('task-store', ['editTask', 'getTask']),
     async submit(data) {
-      await this.editTask({ taskId: this.taskId, newData: data })
+      const taskId = this.$route.params.id
+      await this.mixinEditTask(taskId, data)
       this.$toast.success('Task edited successfully')
-
-      // this.$router.push('/')
     },
   },
 }
@@ -30,8 +17,8 @@ export default {
 
 <template>
   <FormTask
-    :task-data="task.data"
-    :is-loading="editingTask.isLoading"
+    :task-data="mixinTask.data"
+    :is-loading="mixinEditingTask.isLoading"
     submit-button-text="Edit task"
     @submit="submit"
   />

@@ -1,14 +1,3 @@
-import {
-  create,
-  remove,
-  edit,
-} from '@/components/tasks/services/providers/task-axios-provider.js'
-import {
-  createTask,
-  deleteTask,
-  editTask,
-} from '@/components/tasks/services/task-service.js'
-
 export const state = () => ({
   taskList: [],
   task: {
@@ -23,14 +12,6 @@ export const state = () => ({
     createdAt: '',
     updatedAt: '',
   },
-  deletingTask: {
-    isError: false,
-    isLoading: false,
-  },
-  editingTask: {
-    isError: false,
-    isLoading: false,
-  },
 })
 
 export const getters = {
@@ -40,39 +21,6 @@ export const getters = {
   task(state) {
     return state.task
   },
-  deletingTask(state) {
-    return state.deletingTask
-  },
-  editingTask(state) {
-    return state.editingTask
-  },
-}
-
-export const actions = {
-  async deleteTask(context, taskId) {
-    const provider = remove
-    try {
-      context.commit('setDeletingTaskLoading', true)
-      await deleteTask(provider, taskId)
-      context.commit('setDeletingTaskLoading', false)
-    } catch (error) {
-      console.error(error)
-      context.commit('setDeletingTaskError', true)
-      context.commit('setDeletingTaskLoading', false)
-    }
-  },
-  async editTask(context, taskData) {
-    const provider = edit
-    try {
-      context.commit('setEditingTaskLoading', true)
-      await editTask(provider, taskData.taskId, taskData.newData)
-      context.commit('setEditingTaskLoading', false)
-    } catch (error) {
-      console.error(error)
-      context.commit('setEditingTaskError', true)
-      context.commit('setEditingTaskLoading', false)
-    }
-  },
 }
 
 export const mutations = {
@@ -81,20 +29,6 @@ export const mutations = {
   },
   setTask(state, data) {
     state.task = data
-  },
-
-  setDeletingTaskError(state, data) {
-    state.deletingTask.isError = data
-  },
-  setDeletingTaskLoading(state, data) {
-    state.deletingTask.isLoading = data
-  },
-
-  setEditingTaskError(state, data) {
-    state.editingTask.isError = data
-  },
-  setEditingTaskLoading(state, data) {
-    state.editingTask.isLoading = data
   },
 }
 
