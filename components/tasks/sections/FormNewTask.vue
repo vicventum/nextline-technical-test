@@ -1,23 +1,15 @@
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import FormTask from '@/components/tasks/forms/FormTask.vue'
+import { MixinCreateTask } from '@/components/tasks/mixins'
 
 export default {
   components: { FormTask },
-  computed: {
-    ...mapGetters('task-store', ['creatingTask']),
-  },
+  mixins: [MixinCreateTask],
   methods: {
-    ...mapActions('task-store', ['createTask']),
     async submit(data) {
-      await this.createTask(data)
+      await this.mixinCreateTask(data)
 
       this.$toast.success('Task created successfully')
-      // this.$toast('Task created successfully', {
-      //   toastClassName: 'toast--success',
-      // })
-
-      // this.$router.push('/')
     },
   },
 }
@@ -25,7 +17,7 @@ export default {
 
 <template>
   <FormTask
-    :is-loading="creatingTask.isLoading"
+    :is-loading="mixinCreatingTask.isLoading"
     submit-button-text="Create Task"
     @submit="submit"
   />

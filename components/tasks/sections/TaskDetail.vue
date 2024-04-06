@@ -1,57 +1,49 @@
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import ErrorHandler from '@/components/shared/ErrorHandler.vue'
 import TaskDetailMetadata from '@/components/tasks/details/TaskDetailMetadata.vue'
 import TaskDetailContent from '@/components/tasks/details/TaskDetailContent.vue'
 import TaskDetailFooter from '@/components/tasks/details/TaskDetailFooter.vue'
+import { MixinTask } from '@/components/tasks/mixins'
 
 export default {
-  components: { TaskDetailMetadata, TaskDetailContent, TaskDetailFooter },
-  data() {
-    return {
-      taskId: 0,
-    }
+  components: {
+    TaskDetailMetadata,
+    TaskDetailContent,
+    TaskDetailFooter,
+    ErrorHandler,
   },
-  async fetch() {
-    this.taskId = this.$route.params.id
-    await this.getTask(this.taskId)
-  },
-  computed: {
-    ...mapGetters('task-store', ['task']),
-  },
-  methods: {
-    ...mapActions('task-store', ['getTask']),
-  },
+  mixins: [MixinTask],
 }
 </script>
 
 <template>
   <div>
-    <template v-if="task.isError">
-      <h2 class="text-center dark--text text--lighten-4 mt-6">
-        An error has occurred, please try again or reload the page
-      </h2>
-    </template>
-    <template v-else-if="task.isLoading && !Object.keys(task.data).length">
-      <h2 class="text-center dark--text text--lighten-4 mt-6">Loading...</h2>
-    </template>
-
-    <div v-else>
+    <ErrorHandler
+      :is-loading="mixinTask.isLoading"
+      :is-error="mixinTask.isError"
+      :is-empty="!mixinTask.data.id"
+    >
       <TaskDetailMetadata
-        :id="task.data.id"
+        :id="mixinTask.data.id"
         class="mb-6"
-        :title="task.data.title"
-        :is-completed="task.data.isCompleted"
-        :due-date="task.data.dueDate"
-        :tags="task.data.tags"
-        :created-at="task.data.createdAt"
+        :title="mixinTask.data.title"
+        :is-completed="mixinTask.data.isCompleted"
+        :due-date="mixinTask.data.dueDate"
+        :tags="mixinTask.data.tags"
+        :created-at="mixinTask.data.createdAt"
       />
       <TaskDetailContent
         class="mb-6"
-        :description="task.data.description"
-        :comments="task.data.comments"
+        :description="mixinTask.data.description"
+        :comments="mixinTask.data.comments"
       />
-      <TaskDetailFooter :id="task.data.id" />
-    </div>
+    </ErrorHandler>
+    <TaskDetailFooter
+      v-if="!mixinTask.isError"
+      :id="mixinTask.data.id"
+      :class="{ 'mt-10': mixinTask.isLoading }"
+      :is-loading="mixinTask.isLoading"
+    />
   </div>
 </template>
 

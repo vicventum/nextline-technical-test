@@ -11,13 +11,26 @@ export default {
       default: 0,
       required: true,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
 }
 </script>
 
 <template>
   <BarButtonsAction>
-    <v-btn color="warning" :to="`/edit/${id}`" depressed> Edit task </v-btn>
+    <v-btn
+      color="warning"
+      :to="`/edit/${id}`"
+      :loading="isLoading"
+      :disabled="isLoading"
+      depressed
+    >
+      Edit task
+    </v-btn>
   </BarButtonsAction>
 </template>
 

@@ -47,7 +47,9 @@ export default {
       </h2>
     </template>
 
-    <slot v-else />
+    <div v-else>
+      <slot />
+    </div>
   </div>
 </template>
 
