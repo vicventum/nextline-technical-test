@@ -12,7 +12,6 @@ import {
   getTask,
   editTask,
 } from '@/components/tasks/services/task-service.js'
-import { utilRandomColor, utilSplitStringByComma } from '@/utils'
 import {
   utilSortTasksAlpha,
   utilSortTasksCreatedDate,
@@ -21,20 +20,16 @@ import {
 export const state = () => ({
   taskList: [],
   task: {
-    data: {
-      id: 0,
-      title: '',
-      isCompleted: false,
-      dueDate: '',
-      description: '',
-      comments: '',
-      tags: [],
-      token: '',
-      createdAt: '',
-      updatedAt: '',
-    },
-    isError: false,
-    isLoading: false,
+    id: 0,
+    title: '',
+    isCompleted: false,
+    dueDate: '',
+    description: '',
+    comments: '',
+    tags: [],
+    token: '',
+    createdAt: '',
+    updatedAt: '',
   },
   creatingTask: {
     isError: false,
@@ -69,22 +64,6 @@ export const getters = {
 }
 
 export const actions = {
-  async getTask(context, taskId) {
-    const provider = get
-    try {
-      context.commit('setTaskLoading', true)
-      const rawTask = await getTask(provider, taskId)
-      context.commit('setTaskLoading', false)
-
-      const task = formatTask(rawTask)
-      context.commit('setTaskData', task)
-      return task
-    } catch (error) {
-      console.error(error)
-      context.commit('setTaskError', true)
-      context.commit('setTaskLoading', false)
-    }
-  },
   async createTask(context, taskId) {
     const provider = create
     try {
@@ -128,6 +107,9 @@ export const mutations = {
   setTaskList(state, data) {
     state.taskList = data
   },
+  setTask(state, data) {
+    state.task = data
+  },
   setTaskData(state, data) {
     state.task.data = data
   },
@@ -158,29 +140,6 @@ export const mutations = {
   setEditingTaskLoading(state, data) {
     state.editingTask.isLoading = data
   },
-}
-
-function formatTask(rawTask) {
-  const task = Array.isArray(rawTask) ? rawTask[0] : rawTask
-
-  const arrayTransformedTags = utilSplitStringByComma(task.tags)
-  const formattedTags = arrayTransformedTags.map((tag) => ({
-    text: tag,
-    color: utilRandomColor(),
-  }))
-
-  return {
-    id: Number(task.id),
-    title: task.title,
-    isCompleted: !!Number(task.is_completed),
-    dueDate: task.due_date,
-    description: task.description,
-    tags: formattedTags,
-    comments: task.comments,
-    token: task.token,
-    createdAt: task.created_at,
-    updatedAt: task.updated_at,
-  }
 }
 
 // --- Encapsula el algoritmo repetitivo de los actions, pero se descartó por ser complejo de leer al abstraer demasiado:

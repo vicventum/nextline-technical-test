@@ -36,7 +36,7 @@ export default {
         {{ errorMessage }}
       </h2>
     </template>
-    <template v-else-if="isLoading && isEmpty">
+    <template v-else-if="isLoading">
       <h2 class="text-center dark--text text--lighten-4 mt-6">
         {{ loadingMessage }}
       </h2>
@@ -47,7 +47,9 @@ export default {
       </h2>
     </template>
 
-    <slot v-else />
+    <div v-else>
+      <slot />
+    </div>
   </div>
 </template>
 

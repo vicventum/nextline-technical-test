@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import TaskActions from '@/components/tasks/sections/TaskActions.vue'
 import TaskList from '@/components/tasks/sections/TaskList.vue'
 import ErrorHandler from '@/components/shared/ErrorHandler.vue'
