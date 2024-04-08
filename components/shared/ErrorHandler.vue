@@ -32,7 +32,10 @@ export default {
 <template>
   <div>
     <template v-if="isError">
-      <h2 class="text-center dark--text text--lighten-4 mt-6">
+      <h2
+        class="text-center dark--text text--lighten-4 mt-6"
+        data-testid="error-message"
+      >
         {{ errorMessage }}
       </h2>
     </template>
@@ -42,7 +45,10 @@ export default {
       </h2>
     </template>
     <template v-else-if="isEmpty">
-      <h2 class="text-center dark--text text--lighten-4 mt-6">
+      <h2
+        class="text-center dark--text text--lighten-4 mt-6"
+        data-testid="no-tasks-message"
+      >
         {{ emptyMessage }}
       </h2>
     </template>

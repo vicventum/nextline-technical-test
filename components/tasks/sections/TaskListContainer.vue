@@ -34,8 +34,7 @@ export default {
       @change-alpha-order="mixinChangeAlphaOrder"
       @change-created-date-order="mixinChangeCreatedDateOrder"
     />
-    {{ mixinTaskList }}
-    {{ $fetchState }}
+
     <ErrorHandler
       :is-loading="mixinTaskList.isLoading"
       :is-error="mixinTaskList.isError"
