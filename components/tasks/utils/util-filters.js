@@ -10,5 +10,6 @@ export function utilSortTasksAlpha({ taskList, ascending = true }) {
   })
 }
 export function utilSortTasksCreatedDate({ taskList, ascending = true }) {
-  return ascending ? [...taskList] : taskList.toReversed()
+  console.log('🚀 ~ utilSortTasksCreatedDate ~ taskList:', taskList)
+  return ascending ? [...taskList] : [...taskList].reverse()
 }

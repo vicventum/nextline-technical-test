@@ -19,7 +19,7 @@ const mixinTaskList = {
       mixinTaskListOrders: {},
     }
   },
-  async created() {
+  async fetch() {
     await this.mixinGetTaskList()
   },
   computed: {
