@@ -1,5 +1,18 @@
 export const state = () => ({
-  taskList: [],
+  taskList: [
+    {
+      id: 1951,
+      title: 'Probando',
+      is_completed: 0,
+      due_date: '2024-04-06',
+    },
+    {
+      id: 1952,
+      title: 'Actualizan',
+      is_completed: 0,
+      due_date: '2024-04-06',
+    },
+  ],
   task: {
     id: 0,
     title: '',

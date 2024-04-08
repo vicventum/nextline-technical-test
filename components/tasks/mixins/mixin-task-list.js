@@ -11,24 +11,19 @@ import {
 const mixinTaskList = {
   data() {
     return {
-      _taskListUpdated: [],
-      _taskListOrders: {},
-      _isError: false,
-      _isLoading: false,
+      mixinTaskList: {
+        data: [],
+        isLoading: false,
+        isError: false,
+      },
+      mixinTaskListOrders: {},
     }
   },
-  async fetch() {
+  async created() {
     await this.mixinGetTaskList()
   },
   computed: {
     ...mapGetters('task.store', ['taskList']),
-    mixinTaskList() {
-      return {
-        data: this.$data._taskListUpdated,
-        isLoading: this.$data._isLoading,
-        isError: this.$data._isError,
-      }
-    },
   },
   watch: {
     taskList(newTaskList, oldValue) {
@@ -36,9 +31,9 @@ const mixinTaskList = {
         taskList: newTaskList,
       })
 
-      this.$data._taskListUpdated = taskListCreatedAtAscendingOrder
+      this.mixinTaskList.data = taskListCreatedAtAscendingOrder
 
-      this.$data._taskListOrders = {
+      this.mixinTaskListOrders = {
         alphaAscending: utilSortTasksAlpha({ taskList: newTaskList }),
         alphaDescending: utilSortTasksAlpha({
           taskList: newTaskList,
@@ -51,37 +46,33 @@ const mixinTaskList = {
         }),
       }
     },
-
-    mixinTaskList(newTaskList, oldValue) {
-      console.log('🚀 ~ taskList ~ newTaskList:', newTaskList)
-    },
   },
   methods: {
     ...mapMutations('task.store', ['setTaskList']),
     async mixinGetTaskList() {
       const provider = getAll
       try {
-        this.$data._isLoading = true
+        this.mixinTaskList.isLoading = true
         const rawTaskList = await getTaskList(provider)
-        this.$data._isLoading = false
+        this.mixinTaskList.isLoading = false
 
         const taskList = utilFormatTaskList(rawTaskList)
         this.setTaskList(taskList)
       } catch (error) {
         console.error(error)
-        this.$data._isError = true
-        this.$data._isLoading = false
+        this.mixinTaskList.isError = true
+        this.mixinTaskList.isLoading = false
       }
     },
     mixinChangeAlphaOrder(isAscending) {
-      this.$data._taskListUpdated = isAscending
-        ? this.$data._taskListOrders.alphaAscending
-        : this.$data._taskListOrders.alphaDescending
+      this.mixinTaskList.data = isAscending
+        ? this.mixinTaskList.taskListOrders.alphaAscending
+        : this.mixinTaskList.taskListOrders.alphaDescending
     },
     mixinChangeCreatedDateOrder(isAscending) {
-      this.$data._taskListUpdated = isAscending
-        ? this.$data._taskListOrders.createdDateAscending
-        : this.$data._taskListOrders.createdDateDescending
+      this.mixinTaskList.data = isAscending
+        ? this.mixinTaskList.taskListOrders.createdDateAscending
+        : this.mixinTaskList.taskListOrders.createdDateDescending
     },
   },
 }
