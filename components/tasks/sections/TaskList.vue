@@ -28,6 +28,7 @@ export default {
       :is-completed="task.isCompleted"
       :due-date="task.dueDate"
       class="task"
+      data-testid="task"
       @delete="deleteTask"
     />
   </transition-group>
