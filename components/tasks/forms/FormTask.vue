@@ -58,7 +58,8 @@ export default {
         description: this.data.description,
         due_date: this.data.dueDate ? this.data.dueDate : null,
         comments: this.data.comments,
-        tags: this.getTextValuesAsString(this.data.tags),
+        // tags: this.getTextValuesAsString(this.data.tags),
+        tags: this.data.tags,
         token: this.data.token,
       }
       await this.$emit('submit', formattedData)
