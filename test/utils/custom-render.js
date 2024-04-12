@@ -1,6 +1,8 @@
 import Vuetify from 'vuetify'
 // import { render, screen } from '@testing-library/vue'
 import Vuex from 'vuex'
+// import VueToastification from 'vue-toastification/nuxt'
+
 import {
   createLocalVue,
   mount as originalMount,
@@ -10,8 +12,12 @@ import flushPromises from 'flush-promises'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
+// localVue.use(VueToastification)
 
-export function customMount(component, { store: { moduleName, store } }) {
+export function customMount(
+  component,
+  { store: { moduleName, store }, ...options }
+) {
   return originalMount(component, {
     store: new Vuex.Store({
       modules: {
@@ -26,6 +32,7 @@ export function customMount(component, { store: { moduleName, store } }) {
       RouterLink: RouterLinkStub,
     },
     vuetify: new Vuetify(),
+    ...options,
   })
 }
 
