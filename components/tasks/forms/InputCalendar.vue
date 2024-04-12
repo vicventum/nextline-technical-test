@@ -48,7 +48,7 @@ export default {
       <v-text-field
         v-model="dueDate"
         label="Date"
-        hint="MM/DD/YYYY format"
+        hint="YYYY-MM-DD format"
         prepend-icon="mdi-calendar"
         v-bind="attrs"
         @blur="dueDate = dueDate"
