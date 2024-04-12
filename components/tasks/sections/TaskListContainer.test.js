@@ -23,11 +23,11 @@ afterEach(() => {
 })
 
 describe('When a user lands on page', () => {
-  test('should render the jobs', async () => {
+  test('should render the tasks', async () => {
     const taskList = [
       {
         id: 1951,
-        title: 'Probando',
+        title: 'Test title',
         is_completed: 0,
         due_date: '2024-04-06',
       },
@@ -49,7 +49,7 @@ describe('When a user lands on page', () => {
 
     // screen.debug()
     // expect(task).toBeInTheDocument()
-    // expect(task).toHaveTextContent(/Probando/i)
+    // expect(task).toHaveTextContent(/Test title/i)
   })
 
   describe('and there are no task to show', () => {
@@ -97,7 +97,7 @@ describe('When there are tasks to show', () => {
       const taskList = [
         {
           id: 1951,
-          title: 'Probando',
+          title: 'Test title',
           is_completed: 0,
           due_date: '2024-04-06',
         },
@@ -128,7 +128,7 @@ describe('When there are tasks to show', () => {
       const taskList = [
         {
           id: 1951,
-          title: 'Probando 2',
+          title: 'Test title',
           is_completed: 0,
           due_date: '2024-04-06',
         },
