@@ -44,7 +44,12 @@ export default {
 
       <h2 class="text-h6">{{ title }}</h2>
     </div>
-    <v-btn icon color="error lighten-1" @click="deleteTask">
+    <v-btn
+      color="error lighten-1"
+      data-testid="button-delete"
+      icon
+      @click="deleteTask"
+    >
       <v-icon>mdi-trash-can-outline</v-icon>
     </v-btn>
   </header>

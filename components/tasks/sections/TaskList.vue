@@ -27,8 +27,8 @@ export default {
       :title="task.title"
       :is-completed="task.isCompleted"
       :due-date="task.dueDate"
+      :data-testid="`task-${task.id}`"
       class="task"
-      data-testid="task"
       @delete="deleteTask"
     />
   </transition-group>
