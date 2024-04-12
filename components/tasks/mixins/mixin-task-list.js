@@ -66,13 +66,13 @@ const mixinTaskList = {
     },
     mixinChangeAlphaOrder(isAscending) {
       this.mixinTaskList.data = isAscending
-        ? this.mixinTaskList.taskListOrders.alphaAscending
-        : this.mixinTaskList.taskListOrders.alphaDescending
+        ? this.mixinTaskListOrders.alphaAscending
+        : this.mixinTaskListOrders.alphaDescending
     },
     mixinChangeCreatedDateOrder(isAscending) {
       this.mixinTaskList.data = isAscending
-        ? this.mixinTaskList.taskListOrders.createdDateAscending
-        : this.mixinTaskList.taskListOrders.createdDateDescending
+        ? this.mixinTaskListOrders.createdDateAscending
+        : this.mixinTaskListOrders.createdDateDescending
     },
   },
 }

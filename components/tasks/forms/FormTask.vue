@@ -14,6 +14,7 @@ export default {
         isCompleted: false,
         dueDate: '',
         description: '',
+        comments: '',
         tags: [],
         token: '',
         createdAt: '',
